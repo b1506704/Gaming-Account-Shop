@@ -1,0 +1,56 @@
+main .featured {
+	display: flex;
+	flex-direction: column;
+	background-image: url('../../assets/imgs/utaha_01.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 1000px; 
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	
+}
+main .featured h2 {
+	display: inline-block;
+	margin: 0;
+	width: 100%;
+	font-family: Title;
+	font-size: 60px;
+	color: #feffff;
+	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #9dd7e6;
+	background-color: #241f1f33;
+	padding-bottom: 15px;
+	padding-top: 25px;
+	backdrop-filter: blur(2px);
+}
+main .featured p {
+	display: inline-block;
+	margin: 0;
+	width: 100%;
+	background-color: #241f1f33;
+	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #9dd7e6;
+	font-size: 34px;
+	letter-spacing: 2px;
+	font-family: Subtitle;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	color: #a9f8de;
+	backdrop-filter: blur(2px);
+}
+.card_container {
+	/* position: absolute; */
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+	top: 35vh;
+	width: 100%;
+	/* min-height: 100%; */
+	border-style:dotted;
+	box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+	border-color: rgb(202, 194, 202);
+	border-left: transparent;
+	border-right: transparent;
+	overflow-y: auto;
+	background: transparent;
+}
