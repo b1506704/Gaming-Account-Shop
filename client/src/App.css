@@ -5,28 +5,35 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   outline: none;
+  font-family: Title;
 }
-*:after,
+/* *:after,
 *:before {
   box-sizing: border-box;
-}
+} */
 
 @font-face {
 	font-family: Title;
-	src: url('./assets/fonts/Andromeda-eR2n.ttf');
+	src: url('./assets/fonts/SVN-Birth Of A Hero.ttf');
 }
   
-@font-face {
+/* @font-face {
 	font-family: Subtitle;
-	src: url('./assets/fonts/HP001_5_hang_bold.ttf');
-  
+	src: url('./assets/fonts/SVN-Birth Of A Hero.ttf');
 }
-  
+@font-face {
+	font-family: Header;
+	src: url('./assets/fonts/SVN-Birth Of A Hero.ttf');
+}
+ 
 @font-face {
 	font-family: Outerspace;
 	src: url('./assets/fonts/SoundWave-GOK7a.ttf');
-}
+} */
 
+.drop_shadow {
+	box-shadow: rgba(17, 16, 17, 0.56) 0px 22px 70px 4px;
+}
 html {
   scroll-behavior: smooth;
 }
@@ -34,7 +41,12 @@ body {
 	position: relative;
 	min-height: 100%;
 	background: rgba(255, 255, 255, 0.986);
-  	filter: brightness(.9) contrast(1.2);
+	filter: brightness(.85) contrast(1.2);
+	background: url('./assets/imgs/background_01.jpg') no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 	color: #2b2828;
 	margin: 0;
 	overflow-y: auto;

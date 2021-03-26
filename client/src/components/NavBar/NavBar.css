@@ -29,8 +29,9 @@ header h1 {
 	margin: 0;
 	color: rgb(238, 253, 255);
 	padding: 24px 0;
+	letter-spacing: 2px;
 	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #9dd7e6, 0 0 20px rgb(123, 163, 204), 0 0 25px #0073e6, 0 0 30px #50769c, 0 0 35px #17416b;
-	font-family: Title;
+	/* font-family: Title; */
 }
 header nav {
 	display: flex;
@@ -49,6 +50,5 @@ header nav a {
 	transition: all 0.5s ease-out;
 }
 header nav a:hover {
-	border-bottom: 2px dashed #aaa;
 	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #9dd7e6, 0 0 20px rgb(123, 163, 204), 0 0 25px #0073e6, 0 0 30px #50769c, 0 0 35px #17416b;
 }
