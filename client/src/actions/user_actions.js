@@ -32,9 +32,9 @@ export const uploadLp = (currentImage) => async (dispatch) => {
     console.log(error.message);
   }
 };
-export const deleteLp = (id) => async (dispatch) => {
+export const login = (userName, passWord) => async (dispatch) => {
   try {
-    dispatch({ type: DELETE, payload: id});
+    dispatch({ type: LOGIN_USER, payload: {userName, passWord}});
     // send data to backend
   } catch (error) {
     console.log(error.message);

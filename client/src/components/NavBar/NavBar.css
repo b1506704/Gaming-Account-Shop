@@ -8,8 +8,8 @@ header {
 	border-bottom-style: dotted; 
     border-color: rgb(202, 194, 202);
 	user-select: none;
-	backdrop-filter: blur(4px);
-	background-color: rgba(73, 73, 50, 0.534);
+	/* backdrop-filter: blur(4px); */
+	background-color: rgba(73, 73, 50, 0.671);
 	box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
 	transition: all 0.5s ease-in-out;
 	overflow: hidden;

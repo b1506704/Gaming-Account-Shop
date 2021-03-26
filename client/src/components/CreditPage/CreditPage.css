@@ -1,0 +1,51 @@
+.credit_container {
+    height: 430px;
+    width: 450px;
+    background-color: rgba(173, 173, 155, 0.753);
+    border-radius: 15px;
+ }
+ .credit_container h1 {
+     text-align: center;
+     width: 100%;
+     margin-bottom: 25px;
+     margin-top: 25px;
+ }
+ .credit_container div {
+     padding-left: 100px;
+     padding-right: 100px;
+     width: 100%;
+     margin-bottom: 25px;
+ }
+ .credit_container div label {
+     font-size: 30px;
+ }
+ .credit_container input[type='text'], .credit_container input[type='password'] {
+     color: rgb(199, 56, 111);
+     font-size: 25px;
+     padding: 5px;
+     height: 40px;
+     width: 250px;
+     background-color: rgba(233, 233, 216, 0.6);
+     border-radius: 5px;
+ }
+ .credit_container input[type=submit], .credit_container input[type=button]  {
+     height: 80px;
+     width: 80px;
+     font-size: 15px;
+     border-radius: 100%;
+     color: rgb(252, 252, 252);
+     border-style: none;
+     background-color: black;
+     transition: all 0.35s ease-in-out;
+     margin: 0;
+ }
+ .button_container {
+     display: flex;
+     justify-content: space-evenly;
+     align-items: center;
+     margin: 0;
+ }
+ .credit_container input[type=submit]:hover, .credit_container input[type=button]:hover {
+     transform: translateY(2.5px);
+     color: rgb(207, 195, 195);
+ }
