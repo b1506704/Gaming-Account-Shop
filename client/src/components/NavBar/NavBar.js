@@ -51,6 +51,17 @@ const NavBar = ({userMode, userName}) => {
                         : null
                     }
                     {
+                        userMode != "admin" && userMode != "user"
+                        ? <a onClick={() => {
+                            setIsRegisterPageOpen(true);
+                            setIsCreditPageOpen(false);
+                            setIsLoginPageOpen(false);
+                            modal.current.open();
+                        }}>
+                            Đăng ký</a>
+                        : null 
+                    }
+                    {
                         userMode === "admin" || userMode === "user" 
                         ? <a onClick={() => {
                             dispatch(login('', ''));
@@ -64,17 +75,6 @@ const NavBar = ({userMode, userName}) => {
                             modal.current.open();
                         }}>
                             Đăng nhập</a> 
-                    }
-                    {
-                        userMode != "admin" && userMode != "user"
-                        ? <a onClick={() => {
-                            setIsRegisterPageOpen(true);
-                            setIsCreditPageOpen(false);
-                            setIsLoginPageOpen(false);
-                            modal.current.open();
-                        }}>
-                            Đăng ký</a>
-                        : null 
                     }
                 </nav>
             </div>

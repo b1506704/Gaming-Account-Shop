@@ -30,8 +30,8 @@ const App = () => {
             <div>
                 <NavBar/> 
                 <HeadingTitle title={title} subtitle={subTitle} />
-                <AccountList/>
                 <AccountCategory/>
+                <AccountList/>
                 <Footer/>
             </div>
         );

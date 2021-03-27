@@ -24,8 +24,8 @@ const UserPage = ({userName}) => {
             <div ref={topRef} className="scroll_position_holder"></div>
             <NavBar userName={userName} userMode="user"/>
             <HeadingTitle title={"Welcome to gaming account shop"} subtitle={`Chào mừng ${userName} đến với Gaming Account Shop`}/>
-            <AccountList/>
             <AccountCategory/>
+            <AccountList/>
             <Footer/>
         </div>
     );

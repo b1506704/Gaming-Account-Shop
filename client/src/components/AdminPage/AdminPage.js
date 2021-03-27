@@ -24,8 +24,8 @@ const AdminPage = ({userName}) => {
             <div ref={topRef} className="scroll_position_holder"></div>
             <NavBar userName={userName} userMode="admin"/>
             <HeadingTitle title="Admin Panel" subtitle="Trang quản lý cơ sở dữ liệu"/>
-            <EditAccountList/>
             <EditAccountCategory/>
+            <EditAccountList/>
             <Footer/>
         </div>
     );
