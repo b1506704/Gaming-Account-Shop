@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 import {login} from '../../actions/user_actions';
@@ -10,16 +10,29 @@ const LoginPage = ({close}) => {
         userName: '',
         passWord: ''
     });
+    const modalRef = useRef();
 
     useEffect(() => {
         dispatch(login(userInfo.userName, userInfo.passWord));
     },[userInfo, setUserInfo]);
 
+    useEffect(() => {
+        scrollToModal();
+    });
     const handleLogin = () => {
         console.log(`${userInfo.userName} ${userInfo.passWord}`);
     }
+
+    const scrollToModal = () => {
+        modalRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start", 
+          inline: "nearest"
+        });
+      };
     return(
         <div className="login_container drop_shadow">
+            <div ref={modalRef} className="scroll_position_holder"></div>
             <h1>Đăng nhập</h1>
             <form onSubmit={(e) => {
                     e.preventDefault();

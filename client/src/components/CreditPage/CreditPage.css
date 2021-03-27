@@ -49,3 +49,7 @@
      transform: translateY(2.5px);
      color: rgb(207, 195, 195);
  }
+ .credit_container .scroll_position_holder {
+    position: relative;
+    top: -25vh;
+}

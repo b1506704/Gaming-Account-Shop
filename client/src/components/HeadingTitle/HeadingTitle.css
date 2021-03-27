@@ -11,7 +11,6 @@
 	margin: 0;
 	width: 100%;
 	letter-spacing: 2px;
-	/* font-family: Title; */
 	font-size: 60px;
 	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #9dd7e6;
 	padding-bottom: 15px;
@@ -23,7 +22,6 @@
 	width: 100%;
 	font-size: 34px;
 	letter-spacing: 2px;
-	/* font-family: Subtitle; */
 	padding-bottom: 10px;
 	padding-top: 10px;
     text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #9dd7e6;

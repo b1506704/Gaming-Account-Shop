@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 import './CreditPage.css';
@@ -9,9 +9,22 @@ const CreditPage = ({close}) => {
         passWord: ''
     });
     const dispatch = useDispatch();
+    const modalRef = useRef();
 
+    useEffect(() => {
+        scrollToModal();
+    });
+
+    const scrollToModal = () => {
+        modalRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start", 
+          inline: "nearest"
+        });
+      };
     return(
         <div className="credit_container drop_shadow">
+            <div ref={modalRef} className="scroll_position_holder"></div>
             <h1>Nạp thẻ</h1>
             <form onSubmit={(e) => {
                     e.preventDefault();
