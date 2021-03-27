@@ -31,7 +31,7 @@ const CardPage = ({context}) => {
             return(
                 <div className="card_page">
                     <p> <b>Quản lý danh mục game</b> 
-                        <button type="button" className="add_button drop_shadow"> Thêm danh mục </button>
+                        <button type="button" className="add_button drop_shadow"> Thêm </button>
                     </p>
                     <div className="card_container">
                         {category.map ((item,key) => (<Card key={key} id={item.name} type={"category"}/>))}
@@ -42,7 +42,7 @@ const CardPage = ({context}) => {
             return(
                 <div className="card_page">
                     <p> <b>Quản lý tài khoản game</b> 
-                        <button type="button" className="add_button drop_shadow"> Thêm tài khoản game </button>
+                        <button type="button" className="add_button drop_shadow"> Thêm </button>
                     </p>
                     <div className="card_container">
                         {acc.map ((item,key) => (<Card key={key} id={item.id} type={"acc"}/>))}
