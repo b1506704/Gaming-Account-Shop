@@ -34,9 +34,7 @@ export default (state = {}, action) => {
             }
         }
     case GET_CART_ITEMS_USER:
-        return {
-            ...state, cartDetail: action.payload
-        }
+        return {...state, cartDetail: action.payload}
     case REMOVE_CART_ITEM_USER:
         return {
             ...state,

@@ -13,14 +13,16 @@ const RegisterPage = ({close}) => {
     const modalRef = useRef();
 
     useEffect(() => {
-        dispatch(register(userInfo));
+        if (userInfo.userName && userInfo.passWord) {
+            dispatch(register(userInfo));
+        }
     },[userInfo, setUserInfo]);
 
     useEffect(() => {
         scrollToModal();
     });
     const handleLogin = () => {
-        console.log(`${userInfo.userName} ${userInfo.passWord}`);
+        // console.log(`${userInfo.userName} ${userInfo.passWord}`);
     }
 
     const scrollToModal = () => {

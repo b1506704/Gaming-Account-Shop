@@ -13,7 +13,9 @@ const LoginPage = ({close}) => {
     const modalRef = useRef();
 
     useEffect(() => {
-        dispatch(login(userInfo));
+        if (userInfo.userName && userInfo.passWord) {
+            dispatch(login(userInfo));
+        }
     },[userInfo, setUserInfo]);
 
     useEffect(() => {

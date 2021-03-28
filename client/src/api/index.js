@@ -1,17 +1,9 @@
 import axios from 'axios';
-//url depends on python flask app host server.
-const url = 'http://127.0.0.1:5000/prediction/';
 
-//api for fetching asynch prediction endpoints from backend
-// export const fetchLp = () => axios.post(url);
+const url = 'http://localhost:5000/users';
 
-//api for uploading images to server
-export const uploadLp = (newLp) => axios.post(url, newLp, {
-    //for caching images
-    headers: {
-        'Content-Transfer-Encoding':'base64',
-        'Content-Type':'image/jpeg',
-        'Cache-Control': 'public, max-age=604800'
-    }
-});
-
+// export const fetchPosts = () => axios.get(url);
+export const createUser = (newUser) => axios.post(url, newUser);
+// export const likePost = (id) => axios.patch(`${url}/${id}/likePost`);
+// export const updatePost = (id, updatedPost) => axios.patch(`${url}/${id}`, updatedPost);
+// export const deletePost = (id) => axios.delete(`${url}/${id}`);
