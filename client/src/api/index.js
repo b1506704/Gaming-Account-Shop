@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const url = 'http://localhost:80/users';
+// const url = 'http://localhost:80/users';
+const url = 'https://gaming-account-shop.herokuapp.com/users';
 
 // export const fetchPosts = () => axios.get(url);
 export const createUser = (newUser) => axios.post(url, newUser);
