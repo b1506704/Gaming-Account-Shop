@@ -10,7 +10,7 @@ import userRoutes from './routes/users.js';
 
 const app = express();
 const __dirname = path.resolve();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 80;
 dotenv.config();
 app.use(bodyParser.json({ limit: '30mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
