@@ -16,7 +16,6 @@ import * as api from '../api/index.js';
 
 export const login = (userInfo) => async (dispatch) => {
   try {
-    // send data to backend
     // const { data } = await api.createUser(userInfo);
     dispatch({ type: LOGIN_USER, payload: userInfo});
     
