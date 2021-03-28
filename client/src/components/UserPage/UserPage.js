@@ -7,22 +7,10 @@ import AccountList from '../AccountList/AccountList';
 import Footer from '../Footer/Footer';
 import './UserPage.css';
 
-const UserPage = ({userName}) => {
-    const topRef = useRef();
-    useEffect(() => {
-        scrollToModal();
-    });
-    const scrollToModal = () => {
-        topRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "start", 
-          inline: "nearest"
-        });
-      };
+const UserPage = ({userName, balance}) => {
     return(
         <div>
-            <div ref={topRef} className="scroll_position_holder"></div>
-            <NavBar userName={userName} userMode="user"/>
+            <NavBar userName={userName} userMode="user" balance= {balance}/>
             <HeadingTitle title={"Welcome to gaming account shop"} subtitle={`Chào mừng ${userName} đến với Gaming Account Shop`}/>
             <AccountCategory/>
             <AccountList/>

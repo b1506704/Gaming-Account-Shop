@@ -8,7 +8,7 @@ import CreditPage from '../CreditPage/CreditPage';
 import {login} from '../../actions/user_actions';
 import './NavBar.css';
 
-const NavBar = ({userMode, userName}) => {
+const NavBar = ({userMode, userName, balance}) => {
     const dispatch = useDispatch();
     const modal = useRef(null);
     const [isLoginPageOpen, setIsLoginPageOpen] = useState(false);
@@ -42,12 +42,12 @@ const NavBar = ({userMode, userName}) => {
                     }
                     {
                         userMode === "user" 
-                        ? <a> | {userName} |</a>
+                        ? <a style={{color: "yellow"}}> | {userName} | Số dư: {balance} VND |</a>
                         : null
                     }
                     {
                         userMode === "admin" 
-                        ? <a> | {userName} |</a>
+                        ? <a style={{color: "yellow"}}> | {userName} |</a>
                         : null
                     }
                     {

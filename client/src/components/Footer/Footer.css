@@ -2,7 +2,6 @@ footer {
 	position: absolute;
 	bottom: 0;
 	user-select: none;
-	backdrop-filter: blur(4px);
 	background-color: rgba(73, 73, 50, 0.534);
 	color: rgb(238, 253, 255);
 	width: 100%;

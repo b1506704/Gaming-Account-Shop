@@ -11,6 +11,9 @@
      margin-top: 25px;
  }
  .credit_container div {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
      padding-left: 100px;
      padding-right: 100px;
      width: 100%;
@@ -19,16 +22,16 @@
  .credit_container div label {
      font-size: 30px;
  }
- .credit_container input[type='text'], .credit_container input[type='password'] {
-     color: rgb(199, 56, 111);
-     font-size: 25px;
-     padding: 5px;
-     height: 40px;
-     width: 250px;
+ .credit_container input[type='text'], .credit_container select {
+     color: rgb(10, 9, 10);
+     font-size: 21px;
+     padding-left: 5px;
+     height: 30px;
+     width: 120px;
      background-color: rgba(233, 233, 216, 0.6);
      border-radius: 5px;
  }
- .credit_container input[type=submit], .credit_container input[type=button]  {
+.credit_container input[type=submit], .credit_container input[type=button] {
      height: 80px;
      width: 80px;
      font-size: 15px;
@@ -49,6 +52,7 @@
      transform: translateY(2.5px);
      color: rgb(207, 195, 195);
  }
+ 
  .credit_container .scroll_position_holder {
     position: relative;
     top: -25vh;

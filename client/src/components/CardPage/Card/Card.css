@@ -6,21 +6,22 @@
     border: transparent;
     background: #00010271;
     user-select: none;
-    overflow: hidden;
-    height: 410px;
-    width: 280px;
-    
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 400px;
+    width: 310px;
     border-radius: 10px;
     margin-top: 25px;
+    font-weight: 1000;
     margin-bottom: 25px;
     transition: all 0.3s ease-in-out;
   }
-  .card_detail:hover {
+.card_detail:hover {
     background: #00010288;
     transform: scale3d(1.05, 1.05, 0.5);
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff;
+    /* text-shadow: 0 0 5px #fff, 0 0 10px #fff; */
   }
-  .card_detail .title_bar {
+.card_detail .title_bar {
     position: absolute;
     top: 5vh;
     text-align: center;
@@ -34,7 +35,7 @@
     width: 100%;
     z-index: 2;
   }
-  .card_detail .price_button {
+.card_detail .price_button {
       position: absolute;
       opacity: 0.3;
       bottom: 5vh;
@@ -50,7 +51,7 @@
       cursor: pointer;
       z-index: 2;
     }
-  .card_detail .price_button:hover {
+.card_detail .price_button:hover {
     opacity: 1;
     background: #00010288;
     text-shadow: 0 0 5px #fff, 0 0 10px #fff;
@@ -58,18 +59,25 @@
   
 .acc_info {
     position: absolute;
-    padding-top: 20px;
-    /* padding-bottom: 10px; */
+    padding-top: 100px;
+    padding-bottom: 15px;
     color: rgb(255, 255, 255);
-    height: 100px;
+    height: 250px;
     width: 100%;
-    bottom: 13vh;
+    bottom: 0vh;
+    overflow-y: auto;
     background: transparent;
-}  
+  }  
 .acc_info div {
     text-align: left;
-    margin-top: 10px;
-    margin-left: 20px;
+    margin-top: 8px;
+    font-size: 15px;
+    font-family: Subtitle;
+    letter-spacing: 0.5px;
+    padding-left: 20px;
+  }
+.acc_info div div {
+    padding-left: 0px;
 }
 .image_container {
   position: absolute;
@@ -88,3 +96,6 @@
   user-select: none;
   -webkit-user-drag: none;
 }  
+::-webkit-scrollbar {
+	width: 0px;
+}

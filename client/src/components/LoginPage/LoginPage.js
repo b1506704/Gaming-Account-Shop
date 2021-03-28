@@ -13,14 +13,15 @@ const LoginPage = ({close}) => {
     const modalRef = useRef();
 
     useEffect(() => {
-        dispatch(login(userInfo.userName, userInfo.passWord));
+        dispatch(login(userInfo));
     },[userInfo, setUserInfo]);
 
     useEffect(() => {
         scrollToModal();
     });
+    
     const handleLogin = () => {
-        console.log(`${userInfo.userName} ${userInfo.passWord}`);
+        // console.log(`${userInfo.userName} ${userInfo.passWord}`);
     }
 
     const scrollToModal = () => {
@@ -40,19 +41,11 @@ const LoginPage = ({close}) => {
                 }}>
                 <div>
                     <label>Tên đăng nhập:</label>
-                    <input type="text" name="username" 
-                    onSubmit= {(e) => {
-                        setUserInfo({...userInfo, userName: e.target.value});}
-                    }>
-                    </input>
+                    <input type="text" autoFocus={true} name="username"></input>
                 </div>
                 <div>
                     <label>Mật khẩu:</label>
-                    <input type="password" name="password" 
-                    onSubmit= {(e) => {
-                        setUserInfo({...userInfo, passWord: e.target.value});
-                    }}>
-                    </input>
+                    <input type="password" name="password"></input>
                 </div>
                 <div className="button_container">
                     <input type="submit" className="drop_shadow neon_effect" value="Đăng nhập" onClick={handleLogin}></input>

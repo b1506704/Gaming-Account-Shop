@@ -13,7 +13,7 @@ const RegisterPage = ({close}) => {
     const modalRef = useRef();
 
     useEffect(() => {
-        dispatch(register(userInfo.userName, userInfo.passWord));
+        dispatch(register(userInfo));
     },[userInfo, setUserInfo]);
 
     useEffect(() => {

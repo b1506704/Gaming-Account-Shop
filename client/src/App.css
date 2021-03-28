@@ -17,19 +17,12 @@
 	src: url('./assets/fonts/SVN-Birth Of A Hero.ttf');
 }
   
-/* @font-face {
+@font-face {
 	font-family: Subtitle;
-	src: url('./assets/fonts/SVN-Birth Of A Hero.ttf');
+	src: url('./assets/fonts/SVN-Adam Gorry.ttf');
 }
-@font-face {
-	font-family: Header;
-	src: url('./assets/fonts/SVN-Birth Of A Hero.ttf');
-}
- 
-@font-face {
-	font-family: Outerspace;
-	src: url('./assets/fonts/SoundWave-GOK7a.ttf');
-} */
+
+
 
 .drop_shadow {
 	box-shadow: rgba(17, 16, 17, 0.56) 0px 22px 70px 4px;

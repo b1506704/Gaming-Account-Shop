@@ -4,7 +4,6 @@
 	align-items: center;
 	justify-content: center;
 	text-align: center;
-    backdrop-filter: blur(2px);
 }
 .heading_container h2 {
     display: inline-block;

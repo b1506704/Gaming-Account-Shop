@@ -13,18 +13,25 @@ import './App.css';
 const App = () => {
     const [title, setTitle] = useState("Welcome to gaming account shop");
     const [subTitle, setSubTitle] = useState("Most trusted gaming trading platform");
-    const [testUser, setTestUser] = useState({ userName: 'test', passWord: 'test'});
+    const [testUser, setTestUser] = useState({ userName: 'test', passWord: 'test', balance: 9999999});
     const [admin, setAdmin] = useState({ userName: 'admin', passWord: 'admin'});
+    // const [userBank, setUserBank] = useState(120000);
     // send to userinfo to db
     const loginInfo = useSelector((state) => state.user_reducer.login);
     console.log('Login info:' + JSON.stringify(loginInfo));
     const registerInfo = useSelector((state) => state.user_reducer.register);
     console.log('Register info:' + JSON.stringify(registerInfo));
+    const creditInfo = useSelector((state) => state.user_reducer.credit);
+    console.log('Credit info:' + JSON.stringify(creditInfo));
+    const buyAccountInfo = useSelector((state) => state.user_reducer.account);
+    console.log('Buy acc info:' + JSON.stringify(buyAccountInfo));
+    const filterCategory = useSelector((state) => state.user_reducer.filterCategory);
+    console.log('Filter info:' + JSON.stringify(filterCategory));
 
     if (loginInfo!= null && loginInfo.userName === admin.userName && loginInfo.passWord === admin.passWord) {
         return (<AdminPage userName ={admin.userName}/>);
-    } else if (loginInfo!= null && loginInfo.userName === testUser.userName && loginInfo.userName === testUser.passWord){
-        return (<UserPage userName ={testUser.userName}/>);
+    } else if (loginInfo!= null && loginInfo.userName === testUser.userName && loginInfo.passWord === testUser.passWord){
+        return (<UserPage userName ={testUser.userName} balance={testUser.balance}/>);
     } else {
         return(
             <div>
