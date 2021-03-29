@@ -7,19 +7,19 @@ const router = express.Router();
 
 export const getUsers = async (req, res) => { 
     try {
-        const user = await User.find();
+        const users = await User.find();
                 
-        res.status(200).json(user);
+        res.status(200).json(users);
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
 }
 
 export const getUser = async (req, res) => { 
-    const { id } = req.params;
+    const { userName } = req.params;
 
     try {
-        const user = await User.findById(id);
+        const user = await User.findById(userName);
         
         res.status(200).json(user);
     } catch (error) {

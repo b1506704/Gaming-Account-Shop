@@ -5,12 +5,14 @@ import {buyAccount, filterAccount} from '../../../actions/user_actions';
 import './Card.css';
 import utaha from '../../../assets/imgs/utaha_01.jpg'; 
 
-//id: id của tài khoản game hoặc tên của danh mục game
+//id: id của tài khoản game 
+//name: tên của danh mục game
 //price: giá của tài khoản game
 //type: kiểu của Card là tài khoản game hay danh mục game
 //mode: Card thuộc trang User hay trang Admin
 //isBought: tình trạng đã bán hay chưa của tài khoản
-//accNum: số tài khoản hiện có
+//accNum: số tài khoản game hiện có
+//sellNum: số tài khoản game đã bán
 const Card = ({account, category, type, mode}) => {
     const dispatch = useDispatch();
     const [isEdit, setIsEdit] =useState(false);
@@ -18,7 +20,9 @@ const Card = ({account, category, type, mode}) => {
     const onCardSelect = () => {
       if (type === "acc") {
         dispatch(buyAccount(account));
-        // add confirm dialog
+        // import modal thông báo
+        
+        //
       } else {
         dispatch(filterAccount(category.name));
       }

@@ -13,10 +13,10 @@ import './App.css';
 const App = () => {
     const [title, setTitle] = useState("Welcome to gaming account shop");
     const [subTitle, setSubTitle] = useState("Most trusted gaming trading platform");
+    // dữ liệu test, chưa kết nối db
     const [testUser, setTestUser] = useState({ userName: 'test', passWord: 'test', balance: 9999999});
     const [admin, setAdmin] = useState({ userName: 'admin', passWord: 'admin'});
-    // const [userBank, setUserBank] = useState(120000);
-    // send to userinfo to db
+    //quan sát state của redux store
     const loginInfo = useSelector((state) => state.user_reducer.login);
     console.log('Login info:' + JSON.stringify(loginInfo));
     const registerInfo = useSelector((state) => state.user_reducer.register);

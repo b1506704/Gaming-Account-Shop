@@ -4,7 +4,7 @@ import Card from './Card/Card';
 import './CardPage.css';
 
 const CardPage = ({context}) => {
-    //get data from db
+    //dữ liệu tạm, chưa kết nối db
     const [acc, setAcc] = useState([
         {id: '#01',  price: 15000, isBought: false, accOwner:'test' },
         {id: '#02', price: 35000, isBought: true, accOwner:'test2'},

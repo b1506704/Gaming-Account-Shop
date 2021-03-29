@@ -5,7 +5,6 @@ import path from 'path';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
-// import postRoutes from './routes/posts.js';
 import userRoutes from './routes/users.js';
 
 const app = express();
@@ -20,6 +19,9 @@ app.use('/users', userRoutes);
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
+// process.env.MONGODB_URI là chuỗi kết nối của mongodb
+// trên môi trường bất kỳ
+
 const uri = process.env.MONGODB_URI;
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => app.listen(PORT, () => console.log(`Server Running on Port: http://localhost:${PORT}`)))
