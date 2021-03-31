@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import userRoutes from './routes/users.js';
+import accountRoutes from './routes/accounts.js';
 
 const app = express();
 const __dirname = path.resolve();
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use('/users', userRoutes);
+app.use('/accounts', accountRoutes);
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });

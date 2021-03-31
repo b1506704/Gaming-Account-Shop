@@ -2,9 +2,9 @@ import React from 'react';
 
 import CardPage from '../CardPage/CardPage';
 
-const AccountCategory = () => {
+const AccountList = ({currentAccList}) => {
     return(
-        <CardPage context="list"/>
+        <CardPage context="list" currentAccList={currentAccList}/>
     );
 }
-export default AccountCategory;
+export default AccountList;

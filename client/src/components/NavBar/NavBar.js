@@ -1,11 +1,11 @@
 import { React, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from '../Modal/Modal';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import CreditPage from '../CreditPage/CreditPage';
-import {login} from '../../actions/user_actions';
+import {logout, login} from '../../actions/user_actions';
 import './NavBar.css';
 
 const NavBar = ({userMode, userName, balance}) => {
@@ -14,7 +14,7 @@ const NavBar = ({userMode, userName, balance}) => {
     const [isLoginPageOpen, setIsLoginPageOpen] = useState(false);
     const [isCreditPageOpen, setIsCreditPageOpen] = useState(false);
     const [isRegisterPageOpen, setIsRegisterPageOpen] = useState(false);
-    
+    const currentUserInfo = useSelector ((state) => state.user_reducer.login);
     return(
         <header>
             <div className="content-wrapper">
@@ -24,7 +24,6 @@ const NavBar = ({userMode, userName, balance}) => {
                         userMode === "admin" || userMode === "user" 
                         ? null 
                         : <a onClick={() => {
-                            dispatch(login('', ''));
                             modal.current.close();
                         }}>
                             Trang chủ</a>
@@ -64,7 +63,9 @@ const NavBar = ({userMode, userName, balance}) => {
                     {
                         userMode === "admin" || userMode === "user" 
                         ? <a onClick={() => {
-                            dispatch(login('', ''));
+                            
+                            dispatch(logout(currentUserInfo));
+                            dispatch(login(null));
                             modal.current.close();
                             }}>
                             Đăng xuất</a> 

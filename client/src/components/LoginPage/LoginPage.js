@@ -23,7 +23,7 @@ const LoginPage = ({close}) => {
     });
     
     const handleLogin = () => {
-        // console.log(`${userInfo.userName} ${userInfo.passWord}`);
+        // dispatch(login(userInfo));
     }
 
     const scrollToModal = () => {

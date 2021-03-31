@@ -1,5 +1,5 @@
 import {React, useEffect, useState} from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Footer from './components/Footer/Footer';
 import NavBar from './components/NavBar/NavBar';
@@ -8,37 +8,36 @@ import AccountList from './components/AccountList/AccountList';
 import HeadingTitle from './components/HeadingTitle/HeadingTitle';
 import AdminPage from './components/AdminPage/AdminPage';
 import UserPage from './components/UserPage/UserPage';
+import {fetchAccount} from './actions/user_actions';
 import './App.css';
 
 const App = () => {
+    const dispatch = useDispatch();
     const [title, setTitle] = useState("Welcome to gaming account shop");
     const [subTitle, setSubTitle] = useState("Most trusted gaming trading platform");
-    // dữ liệu test, chưa kết nối db
-    const [testUser, setTestUser] = useState({ userName: 'test', passWord: 'test', balance: 9999999});
-    const [admin, setAdmin] = useState({ userName: 'admin', passWord: 'admin'});
+    const [currentAccList, setCurrentAccList] = useState([{id: '1',  price: 0, isBought: false, accOwner:'test' }]);
+    useEffect(()=> {
+        dispatch(fetchAccount());
+    },[currentAccList, setCurrentAccList]);
+    
+    const [testUser, setTestUser] = useState({ });
+    const [admin, setAdmin] = useState({ });
     //quan sát state của redux store
+    const storeState = useSelector ((state) => state.user_reducer);
+    console.log(storeState);
     const loginInfo = useSelector((state) => state.user_reducer.login);
-    console.log('Login info:' + JSON.stringify(loginInfo));
-    const registerInfo = useSelector((state) => state.user_reducer.register);
-    console.log('Register info:' + JSON.stringify(registerInfo));
-    const creditInfo = useSelector((state) => state.user_reducer.credit);
-    console.log('Credit info:' + JSON.stringify(creditInfo));
-    const buyAccountInfo = useSelector((state) => state.user_reducer.account);
-    console.log('Buy acc info:' + JSON.stringify(buyAccountInfo));
-    const filterCategory = useSelector((state) => state.user_reducer.filterCategory);
-    console.log('Filter info:' + JSON.stringify(filterCategory));
-
-    if (loginInfo!= null && loginInfo.userName === admin.userName && loginInfo.passWord === admin.passWord) {
-        return (<AdminPage userName ={admin.userName}/>);
-    } else if (loginInfo!= null && loginInfo.userName === testUser.userName && loginInfo.passWord === testUser.passWord){
-        return (<UserPage userName ={testUser.userName} balance={testUser.balance}/>);
-    } else {
+    const logoutInfo = useSelector((state) => state.user_reducer.logout);
+    if (loginInfo!= null && loginInfo.isAdmin === true) {
+        return (<AdminPage userName ={loginInfo.userName} currentAccList={currentAccList} setCurrentAccList={setCurrentAccList}/>);
+    } else if (loginInfo!= null && loginInfo.isAdmin === false){
+        return (<UserPage userName ={loginInfo.userName} balance={loginInfo.balance}/>);
+    } else if (loginInfo === undefined || loginInfo === null){
         return(
             <div>
                 <NavBar/> 
                 <HeadingTitle title={title} subtitle={subTitle} />
                 <AccountCategory/>
-                <AccountList/>
+                <AccountList currentAccList={currentAccList}/>
                 <Footer/>
             </div>
         );

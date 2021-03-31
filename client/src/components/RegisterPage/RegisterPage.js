@@ -21,7 +21,7 @@ const RegisterPage = ({close}) => {
     useEffect(() => {
         scrollToModal();
     });
-    const handleLogin = () => {
+    const handleRegister = () => {
         // console.log(`${userInfo.userName} ${userInfo.passWord}`);
     }
 
@@ -42,22 +42,14 @@ const RegisterPage = ({close}) => {
                 }}>
                 <div>
                     <label>Tên đăng ký:</label>
-                    <input type="text" name="username" 
-                    onSubmit= {(e) => {
-                        setUserInfo({...userInfo, userName: e.target.value});}
-                    }>
-                    </input>
+                    <input type="text" name="username"></input>
                 </div>
                 <div>
                     <label>Mật khẩu:</label>
-                    <input type="password" name="password" 
-                    onSubmit= {(e) => {
-                        setUserInfo({...userInfo, passWord: e.target.value});
-                    }}>
-                    </input>
+                    <input type="password" name="password"></input>
                 </div>
                 <div className="button_container">
-                    <input type="submit" className="drop_shadow neon_effect" value="Đăng ký" onClick={handleLogin}></input>
+                    <input type="submit" className="drop_shadow neon_effect" value="Đăng ký" onClick={handleRegister}></input>
                     <input type="button" className="drop_shadow neon_effect" value="Thoát" onClick={close}></input>
                 </div>
             </form>

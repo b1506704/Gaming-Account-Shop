@@ -47,6 +47,7 @@
 	flex-direction: row;
 	justify-content: space-evenly;
 	flex-wrap: wrap;
+	min-height: 250px;
 	width: 100%;
 	overflow: hidden;
 	border-bottom: 5px double rgba(59, 30, 30, 0.486);

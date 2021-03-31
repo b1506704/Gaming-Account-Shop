@@ -1,11 +1,30 @@
 import mongoose from 'mongoose';
-
+import Schema from 'mongoose';
 const accountSchema = mongoose.Schema({
-    id: String,
+    id: {
+        type: String
+        // unique: true
+    },
+    // category: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Category',
+    // },
+    //test property
     category: String,
     imgUrl: String,
-    price: Number,
-    isBought: Boolean,
+    price: {
+        type: Number,
+        min: 0
+    },
+    isBought: {
+        type:Boolean,
+        default: false,
+    },
+    // accOwner: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'User',
+    //     undefined: true
+    // },
     accOwner: String,
     attr1: String,
     attr2: String,
@@ -13,6 +32,6 @@ const accountSchema = mongoose.Schema({
     attr4: String
 });
 
-var Account = mongoose.model('User', accountSchema);
+var Account = mongoose.model('Account', accountSchema);
 
 export default Account;

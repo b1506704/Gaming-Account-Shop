@@ -1,8 +1,29 @@
 import mongoose from 'mongoose';
 
 const userSchema = mongoose.Schema({
-    userName: String,
-    passWord: String
+    userName: {
+        type: String,
+        require: true,
+        unique: true,
+    },
+    passWord: {
+        type: String,
+        require: true,
+        maxlength: 12
+    },
+    balance: {
+        type: Number,
+        min: 0,
+        default: 0
+    },
+    isLogin: {
+        type: Boolean,
+        default: false
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    }
 });
 
 var User = mongoose.model('User', userSchema);
