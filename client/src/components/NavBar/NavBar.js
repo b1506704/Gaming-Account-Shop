@@ -66,7 +66,7 @@ const NavBar = ({userMode, userName, balance}) => {
                             
                             dispatch(logout(currentUserInfo));
                             dispatch(login(null));
-                            // dispatch(addCredit(null));
+                            dispatch(addCredit('',{}));
                             modal.current.close();
                             }}>
                             Đăng xuất</a> 

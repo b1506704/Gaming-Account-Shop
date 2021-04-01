@@ -37,7 +37,7 @@ const App = () => {
     } else if (loginInfo!= null && loginInfo.isAdmin === false){
         return (
             <UserPage userName ={loginInfo.userName} 
-            balance={currentBalance!= undefined ? currentBalance : loginInfo.balance}/>
+            balance={ currentBalance || loginInfo.balance}/>
         );
     } else if (loginInfo === undefined || loginInfo === null){
         return(
