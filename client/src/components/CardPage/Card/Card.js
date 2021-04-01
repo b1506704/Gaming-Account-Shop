@@ -13,7 +13,7 @@ import utaha from '../../../assets/imgs/utaha_01.jpg';
 //isBought: tình trạng đã bán hay chưa của tài khoản
 //accNum: số tài khoản game hiện có
 //sellNum: số tài khoản game đã bán
-const Card = ({account, category, type, mode}) => {
+const Card = ({account, category, card, type, mode}) => {
     const dispatch = useDispatch();
     const [isEdit, setIsEdit] =useState(false);
     
@@ -30,10 +30,11 @@ const Card = ({account, category, type, mode}) => {
     const onCardEdit = () => {
       setIsEdit(true);
     }
+
     return (
       <div className="card_detail drop_shadow">
         <div className="title_bar drop_shadow">
-          { type === "acc" ? account.id : category.name }            
+          { type === "acc" ? account.id : type === "category" ? category.name : type ==="card" ? card.id : null }            
         </div>
         { 
           type === "acc" 
@@ -54,10 +55,18 @@ const Card = ({account, category, type, mode}) => {
               <div> Thuộc tính 4: </div>
               
             </div>
-          : <div className="acc_info">
-              <div> Số tài khoản hiện có: {category.accNum}</div>
-              <div> Đã bán: {category.sellNum}</div>
-            </div>   
+          : type === "category" 
+            ? <div className="acc_info">
+                <div> Số tài khoản hiện có: {category.accNum}</div>
+                <div> Đã bán: {category.sellNum}</div>
+              </div>
+              : type === "card"
+                ? <div className="acc_info">
+                    <div> Nhà mạng: {card.carrier}</div>
+                    <div> Giá trị: {card.value}</div>
+                    <div> Tình trạng:  {card.isBought ? "Đã bán" : "Chưa bán" }</div>
+                  </div>
+                  : null   
         }
         {
           mode === "view"

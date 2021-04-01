@@ -8,6 +8,8 @@ import {
   LOGOUT_USER,
   FILTER_ACCOUNT,
   ON_SUCCESS_BUY_USER,
+  CREATE_CARD,
+  FETCH_CARD
 } from '../constants/actionTypes';
 
 export default (state = {}, action) => {
@@ -18,8 +20,12 @@ export default (state = {}, action) => {
         return { ...state, login: action.payload }
     case FETCH_ACCOUNT:
         return { ...state, accountList: action.payload }
+    case FETCH_CARD:
+        return { ...state, cardList: action.payload}
     case CREATE_ACCOUNT:
-        return { ...state, createdAcc: action.payload }        
+        return { ...state, createdAcc: action.payload }
+    case CREATE_CARD:
+        return { ...state, createdCard: action.payload }        
     case BUY_ACCOUNT:
         return { ...state, account: action.payload }
     case ADD_CREDIT:
@@ -29,7 +35,7 @@ export default (state = {}, action) => {
     case ON_SUCCESS_BUY_USER:
         return { ...state, credit: action.payload}
     case LOGOUT_USER:
-        return { ...state, logout: action.payload}  
+        return { ...state, isPreUserLogout: action.payload}  
     default:
         return state;
   }

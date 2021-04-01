@@ -1,6 +1,7 @@
 import express from 'express';
 
 import User from '../models/user.js';
+import Card from '../models/card.js';
 
 const router = express.Router();
 
@@ -28,7 +29,7 @@ export const logout = async (req, res) => {
     const { userName } = req.body;
     try {
         const user = await User.findOneAndUpdate({userName: userName},{isLogin: false}, {new: true});
-        res.status(200).json(user);
+        res.status(200).json(!user.isLogin);
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
@@ -46,24 +47,25 @@ export const createUser = async (req, res) => {
         res.status(409).json({ message: error.message });
     }
 }
-export const reduceBalance = async (req, res) => { 
+
+export const addCredit = async (req, res) => { 
+    const { userName } = req.params;
+    const { value } = req.body;
     try {
-        const {userName, price} = req.body;
-        
         const user = await User.findOne({userName: userName});
-        const balance = user.reduceBalance(price);
-        res.status(200).json(balance);
+        const updatedUser = await User.findOneAndUpdate({userName: userName},{balance: user.balance + value}, {new: true});
+        res.status(200).json(updatedUser.balance);
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
 }
-export const increaseBalance = async (req, res) => { 
+export const buyAccount = async (req, res) => { 
+    const { userName } = req.params;
+    
+    const { value } = req.body;
     try {
-        const {userName, price} = req.body;
-        
-        const user = await User.findOne({userName: userName});
-        const balance = user.increaseBalance(price);
-        res.status(200).json(balance);
+        const user = await User.findOneAndUpdate({userName: userName},{balance: user.balance +value}, {new: true});
+        res.status(200).json(user);
     } catch (error) {
         res.status(404).json({ message: error.message });
     }

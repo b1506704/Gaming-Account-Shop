@@ -7,3 +7,5 @@ export const CREATE_ACCOUNT = 'create_account';
 export const FILTER_ACCOUNT = 'filter_account';
 export const LOGOUT_USER = 'logout_user';
 export const ON_SUCCESS_BUY_USER = 'on_success_buy_user';
+export const CREATE_CARD = 'create_card';
+export const FETCH_CARD = 'fetch_card';

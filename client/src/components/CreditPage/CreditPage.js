@@ -1,17 +1,18 @@
 import { React, useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {addCredit} from '../../actions/user_actions';
 import './CreditPage.css';
 
 const CreditPage = ({close}) => {
-    const [creditInfo, setCreditInfo] = useState({
-        creditID: '',
-        creditName: '',
-        creditValue: 0
-    });
     const dispatch = useDispatch();
     const modalRef = useRef();
+    const [creditInfo, setCreditInfo] = useState({
+        id: '',
+        carrier: '',
+        value: 0
+    });
+    const currentUserName = useSelector((state) => state.user_reducer.login.userName);
     
     useEffect(() => {
         scrollToModal();
@@ -25,7 +26,7 @@ const CreditPage = ({close}) => {
         });
       };
     const creName = ["Viettel","Mobifone","Vinaphone"];
-    const creValue = [20000, 50000, 100000];
+    const creValue = [20000, 50000, 100000, 200000, 500000, 1000000];
     const [selectedCreName, setSelectedCreName] = useState(creName[0]);
     const [selectedCreValue, setSelectedCreValue] = useState(creValue[0]);
 
@@ -39,7 +40,9 @@ const CreditPage = ({close}) => {
     }
 
     useEffect(() => {
-        dispatch(addCredit(creditInfo));
+        if (creditInfo.id != '') {
+            dispatch(addCredit(currentUserName ,creditInfo));
+        }
     },[creditInfo, setCreditInfo]);
 
     
@@ -53,7 +56,7 @@ const CreditPage = ({close}) => {
             <h1>Nạp thẻ</h1>
             <form onSubmit={(e) => {
                     e.preventDefault();
-                    setCreditInfo({creditID: e.target.ma_the.value, creditName: selectedCreName, creditValue: selectedCreValue});
+                    setCreditInfo({id: e.target.ma_the.value, carrier: selectedCreName, value: selectedCreValue});
                 }}>
                 <div>
                     <label>Mã thẻ:</label>

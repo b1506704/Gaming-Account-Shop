@@ -5,7 +5,7 @@ import Modal from '../Modal/Modal';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import CreditPage from '../CreditPage/CreditPage';
-import {logout, login} from '../../actions/user_actions';
+import {logout, login, addCredit} from '../../actions/user_actions';
 import './NavBar.css';
 
 const NavBar = ({userMode, userName, balance}) => {
@@ -41,7 +41,7 @@ const NavBar = ({userMode, userName, balance}) => {
                     }
                     {
                         userMode === "user" 
-                        ? <a style={{color: "yellow"}}> | {userName} | Số dư: {balance} VND |</a>
+                        ? <a style={{color: "yellow"}}> | {userName} | Số dư: {balance} VND|</a>
                         : null
                     }
                     {
@@ -66,6 +66,7 @@ const NavBar = ({userMode, userName, balance}) => {
                             
                             dispatch(logout(currentUserInfo));
                             dispatch(login(null));
+                            // dispatch(addCredit(null));
                             modal.current.close();
                             }}>
                             Đăng xuất</a> 

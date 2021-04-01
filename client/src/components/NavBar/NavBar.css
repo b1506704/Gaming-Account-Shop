@@ -47,6 +47,8 @@ header nav a {
 	font-size: 25px;
 	padding: 10px 10px;
 	margin: 0 10px;
+	/* width: 180px; */
+	/* word-wrap: break-word; */
 	transition: all 0.5s ease-out;
 }
 header nav a:hover {

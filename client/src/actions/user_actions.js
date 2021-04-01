@@ -8,6 +8,8 @@ import {
   CREATE_ACCOUNT,
   LOGOUT_USER,
   ON_SUCCESS_BUY_USER,
+  FETCH_CARD,
+  CREATE_CARD
 } from '../constants/actionTypes';
 
 import * as api from '../api/index.js';
@@ -39,9 +41,10 @@ export const register = (userInfo) => async (dispatch) => {
     console.log(error.message);
   }
 };
-export const addCredit = (creditInfo) => async (dispatch) => {
+export const addCredit = (userName, creditInfo) => async (dispatch) => {
   try {
-    dispatch({ type: ADD_CREDIT, payload: creditInfo});
+    const { data } = await api.addCredit(userName, creditInfo);
+    dispatch({ type: ADD_CREDIT, payload: data});
   } catch (error) {
     console.log(error.message);
   }
@@ -59,6 +62,22 @@ export const createAccount = (accInfo) => async (dispatch) => {
     const { data } = await api.createAccount(accInfo);
     // dispatch({ type: CREATE_ACCOUNT, payload: data});
     dispatch({ type: CREATE_ACCOUNT, payload: data});
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+export const fetchCard = () => async (dispatch) => {
+  try {
+    const { data } = await api.fetchCard();
+    dispatch({ type: FETCH_CARD, payload: data});
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+export const createCard = (cardInfo) => async (dispatch) => {
+  try {
+    const { data } = await api.createCard(cardInfo);
+    dispatch({ type: CREATE_CARD, payload: data});
   } catch (error) {
     console.log(error.message);
   }
