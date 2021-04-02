@@ -3,13 +3,17 @@ import {
   REGISTER_USER,
   ADD_CREDIT,
   FETCH_ACCOUNT,
+  DELETE_ACCOUNT,
   BUY_ACCOUNT,
   FILTER_ACCOUNT,
   CREATE_ACCOUNT,
   LOGOUT_USER,
-  ON_SUCCESS_BUY_USER,
   FETCH_CARD,
-  CREATE_CARD
+  DELETE_CARD,
+  CREATE_CARD,
+  FETCH_CATEGORY,
+  DELETE_CATEGORY,
+  CREATE_CATEGORY
 } from '../constants/actionTypes';
 
 import * as api from '../api/index.js';
@@ -57,6 +61,14 @@ export const fetchAccount = () => async (dispatch) => {
     console.log(error.message);
   }
 };
+export const deleteAccount = (id) => async (dispatch) => {
+  try {
+    const { data } = await api.deleteAccount(id);
+    dispatch({ type: DELETE_ACCOUNT, payload: data});
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 export const createAccount = (accInfo) => async (dispatch) => {
   try {
     const { data } = await api.createAccount(accInfo);
@@ -74,6 +86,14 @@ export const fetchCard = () => async (dispatch) => {
     console.log(error.message);
   }
 };
+export const deleteCard = (id) => async (dispatch) => {
+  try {
+    const { data } = await api.deleteCard(id);
+    dispatch({ type: DELETE_CARD, payload: data});
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 export const createCard = (cardInfo) => async (dispatch) => {
   try {
     const { data } = await api.createCard(cardInfo);
@@ -82,8 +102,34 @@ export const createCard = (cardInfo) => async (dispatch) => {
     console.log(error.message);
   }
 };
+//category action
+export const fetchCategory = () => async (dispatch) => {
+  try {
+    const { data } = await api.fetchCategory();
+    dispatch({ type: FETCH_CATEGORY, payload: data});
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+export const deleteCategory = (name) => async (dispatch) => {
+  try {
+    const { data } = await api.deleteCategory(name);
+    dispatch({ type: DELETE_CATEGORY, payload: data});
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+export const createCategory = (categoryInfo) => async (dispatch) => {
+  try {
+    const { data } = await api.createCategory(categoryInfo);
+    dispatch({ type: CREATE_CATEGORY, payload: data});
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 export const buyAccount = (accInfo) => async (dispatch) => {
   try {
+    //
     dispatch({ type: BUY_ACCOUNT, payload: accInfo});
   } catch (error) {
     console.log(error.message);

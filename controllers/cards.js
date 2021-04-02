@@ -13,6 +13,15 @@ export const getCards = async (req, res) => {
     }
 }
 
+export const deleteCard = async (req, res) => { 
+    const { id } = req.params;
+    try {
+        const card = await Card.findOneAndDelete({id: id});
+        res.status(200).json(card);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
 export const createCard = async (req, res) => {
     const { id, carrier, value } = req.body;
     const newCard = new Card({ id, carrier, value });

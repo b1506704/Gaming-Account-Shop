@@ -8,6 +8,7 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/users.js';
 import accountRoutes from './routes/accounts.js';
 import cardRoutes from './routes/cards.js';
+import categoryRoutes from './routes/categories.js';
 
 const app = express();
 const __dirname = path.resolve();
@@ -20,6 +21,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 app.use('/users', userRoutes);
 app.use('/accounts', accountRoutes);
 app.use('/cards', cardRoutes);
+app.use('/categories', categoryRoutes);
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });

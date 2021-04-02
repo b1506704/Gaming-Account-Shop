@@ -14,6 +14,16 @@ export const getAccounts = async (req, res) => {
     }
 }
 
+export const deleteAccount = async (req, res) => { 
+    const { id } = req.params;
+    try {
+        const account = await Account.findOneAndDelete({id: id});
+        res.status(200).json(account);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
 export const getAccount = async (req, res) => { 
     const { id } = req.params;
 

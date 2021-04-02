@@ -1,14 +1,14 @@
 import {React, useState} from 'react';
 import {useDispatch} from 'react-redux';
 
-import {buyAccount, filterAccount} from '../../../actions/user_actions';
+import {buyAccount, filterAccount, deleteAccount, deleteCard, deleteCategory} from '../../../actions/user_actions';
 import './Card.css';
 import utaha from '../../../assets/imgs/utaha_01.jpg'; 
 
 //id: id của tài khoản game 
 //name: tên của danh mục game
 //price: giá của tài khoản game
-//type: kiểu của Card là tài khoản game hay danh mục game
+//type: kiểu của Card là tài khoản game hay danh mục game hay thẻ game
 //mode: Card thuộc trang User hay trang Admin
 //isBought: tình trạng đã bán hay chưa của tài khoản
 //accNum: số tài khoản game hiện có
@@ -20,21 +20,26 @@ const Card = ({account, category, card, type, mode}) => {
     const onCardSelect = () => {
       if (type === "acc") {
         dispatch(buyAccount(account));
-        // import modal thông báo
-        
-        //
-      } else {
+      } else if (type === "category") {
         dispatch(filterAccount(category.name));
       }
     }
     const onCardEdit = () => {
       setIsEdit(true);
     }
-
+    const onCardDelete = () => {
+      if (type === "acc") {
+        dispatch(deleteAccount(account.id));
+      } else if (type === "card") {
+        dispatch(deleteCard(card.id));
+      } else if (type === "category") {
+        dispatch(deleteCategory(category.name));
+      }
+    }
     return (
       <div className="card_detail drop_shadow">
         <div className="title_bar drop_shadow">
-          { type === "acc" ? account.id : type === "category" ? category.name : type ==="card" ? card.id : null }            
+          { type === "acc" ? '#' + account.id : type === "category" ? category.name : type ==="card" ? '#' + card.id : null }            
         </div>
         { 
           type === "acc" 
@@ -70,12 +75,17 @@ const Card = ({account, category, card, type, mode}) => {
         }
         {
           mode === "view"
-          ?  <button type="button" className="price_button drop_shadow" onClick={onCardSelect}>
+          ?  <button type="button" className="card_button drop_shadow" onClick={onCardSelect}>
                {type === "acc" ? "Mua" : "Duyệt"}
             </button>
-          : <button type="button" className="price_button drop_shadow" onClick={onCardEdit}>
-              Sửa          
-            </button>
+          : <>
+              <button type="button" className="card_button edit_button drop_shadow" onClick={onCardEdit}>
+                  Sửa          
+              </button>
+              <button type="button" className="card_button delete_button drop_shadow" onClick={onCardDelete}>
+                  Xóa         
+              </button>
+            </>
         }
         <div className="image_container">
           <img className="image" alt="Loading..." src={utaha}/>

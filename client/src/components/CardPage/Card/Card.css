@@ -19,8 +19,7 @@
 .card_detail:hover {
     background: #00010288;
     transform: scale3d(1.05, 1.05, 0.5);
-    /* text-shadow: 0 0 5px #fff, 0 0 10px #fff; */
-  }
+}
 .card_detail .title_bar {
     position: absolute;
     top: 5vh;
@@ -35,23 +34,29 @@
     width: 100%;
     z-index: 2;
   }
-.card_detail .price_button {
-      position: absolute;
-      opacity: 0.3;
-      bottom: 5vh;
-      text-align: center;
-      border: transparent;
-      background: rgba(32, 34, 36, 0.63);
-      user-select: none;
-      overflow: hidden;
-      height: 40px; 
-      color: rgb(255, 255, 255);
-      font-size: 25px;
-      width: 100%;
-      cursor: pointer;
-      z-index: 2;
-    }
-.card_detail .price_button:hover {
+.card_detail .card_button {
+    position: absolute;
+    opacity: 0.3;
+    bottom: 3vh;
+    text-align: center;
+    border: transparent;
+    background: rgba(50, 50, 51, 0.63);
+    user-select: none;
+    overflow: hidden;
+    height: 40px; 
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    width: 100%;
+    cursor: pointer;
+    z-index: 2;
+}
+.edit_button {
+      bottom: 3vh !important;
+}
+.delete_button {
+  bottom: 10vh !important;
+}
+.card_detail .card_button:hover {
     opacity: 1;
     background: #00010288;
     text-shadow: 0 0 5px #fff, 0 0 10px #fff;

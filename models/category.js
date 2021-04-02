@@ -1,7 +1,10 @@
 import mongoose from 'mongoose';
 
 const categorySchema = mongoose.Schema({
-    name: String,
+    name: {
+        type: String,
+        unique: true
+    },
     imgUrl: String,
     accNum: {
         type: Number,
