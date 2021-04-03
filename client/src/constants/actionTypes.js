@@ -14,3 +14,4 @@ export const FETCH_CARD = 'fetch_card';
 export const CREATE_CATEGORY = 'create_category';
 export const DELETE_CATEGORY = 'delete_category';
 export const FETCH_CATEGORY = 'fetch_category';
+export const SET_NOTIFICATION = 'set_notification';

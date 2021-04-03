@@ -1,5 +1,8 @@
 header {
 	position: sticky;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	top: 0;
 	width: 100%;
 	border-left-style: none;
@@ -8,11 +11,10 @@ header {
 	border-bottom-style: dotted; 
     border-color: rgb(202, 194, 202);
 	user-select: none;
-	/* backdrop-filter: blur(4px); */
 	background-color: rgba(73, 73, 50, 0.671);
 	box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
 	transition: all 0.5s ease-in-out;
-	overflow: hidden;
+	overflow: visible;
 	z-index: 999;
 }
 header:hover {
@@ -22,22 +24,14 @@ header .content-wrapper {
 	display: flex;
 }
 header h1 {
-	display: flex;
-	flex-grow: 1;
-	flex-basis: 0;
 	font-size: 30px;
-	margin: 0;
 	color: rgb(238, 253, 255);
-	padding: 24px 0;
+	margin-right: 40vh;
 	letter-spacing: 2px;
 	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #9dd7e6, 0 0 20px rgb(123, 163, 204), 0 0 25px #0073e6, 0 0 30px #50769c, 0 0 35px #17416b;
-	/* font-family: Title; */
 }
 header nav {
 	display: flex;
-	flex-grow: 1;
-	flex-basis: 0;
-	font-family: Subtitle;
 	justify-content: center;
 	align-items: center;
 }
@@ -47,8 +41,6 @@ header nav a {
 	font-size: 25px;
 	padding: 10px 10px;
 	margin: 0 10px;
-	/* width: 180px; */
-	/* word-wrap: break-word; */
 	transition: all 0.5s ease-out;
 }
 header nav a:hover {

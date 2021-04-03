@@ -24,7 +24,7 @@
 	padding-top: 10px;
 	color: #353f3c;
 }
-.card_page .add_button {
+.card_page .card_menu_button {
 	position: absolute;
 	height: 50px;
     width: 200px;
@@ -38,7 +38,13 @@
     transition: all 0.35s ease-in-out;
     margin: 0;
 }
-.card_page button:hover {
+.refresh_button {
+	right: 35vh !important;
+}
+.refresh_button_user {
+	right: 2vh !important;
+}
+.card_page .card_menu_button:hover {
 	transform: scaleX(1.05);
 	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #9dd7e6, 0 0 20px rgb(123, 163, 204), 0 0 25px #0073e6, 0 0 30px #50769c, 0 0 35px #17416b;
 	background-color: rgb(0, 0, 0);

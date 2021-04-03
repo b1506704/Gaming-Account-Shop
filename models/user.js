@@ -16,6 +16,11 @@ const userSchema = mongoose.Schema({
         min: 0,
         default: 0
     },
+    phoneNumber: {
+        type: Number,
+        default: 0,
+        unique: true
+    },
     isLogin: {
         type: Boolean,
         default: false

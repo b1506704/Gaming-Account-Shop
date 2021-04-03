@@ -19,7 +19,8 @@
 .login_container div label {
     font-size: 30px;
 }
-.login_container input[type='text'], .login_container input[type='password'] {
+.login_container input[type='text'], 
+.login_container input[type='password'] {
     color: rgb(199, 56, 111);
     font-size: 25px;
     padding: 5px;
@@ -28,7 +29,8 @@
     background-color: rgba(233, 233, 216, 0.6);
     border-radius: 5px;
 }
-.login_container input[type=submit], .login_container input[type=button]  {
+.login_container input[type=submit], 
+.login_container input[type=button]  {
     height: 80px;
     width: 80px;
     font-size: 15px;
@@ -39,7 +41,7 @@
     transition: all 0.35s ease-in-out;
     margin: 0;
 }
-.button_container {
+.login_container .button_container {
     display: flex;
     justify-content: space-evenly;
     align-items: center;

@@ -1,0 +1,24 @@
+.notification_container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: -50vh;
+    /* left: -30vh; */
+    left: -1vh;
+    height: 80px;
+    border-radius: 5px;
+    min-width: 250px;
+    /* opacity: 0.1; */
+    opacity: 1;
+    background-color: rgba(247, 239, 230, 0.486);
+    transition: all 0.6s ease-in-out;
+}
+.notification_container:hover {
+    opacity: 1;
+    /* transform: translateX(29vh); */
+    background-color: rgba(247, 239, 230, 0.507);
+}
+.notification_container h2 {
+    color: white;
+}

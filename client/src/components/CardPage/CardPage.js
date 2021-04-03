@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Card from './Card/Card';
 import LoadingContainer from '../../utils/LoadingContainer/LoadingContainer';
-import {createAccount, createCard, createCategory} from '../../actions/user_actions';
+import {createAccount, createCard, createCategory, fetchCategory, fetchCard, fetchAccount, setNotification} from '../../actions/user_actions';
 import getRndInteger from '../../utils/RandomGenerator';
 import './CardPage.css';
 
@@ -14,7 +14,14 @@ const CardPage = ({context}) => {
     const categoryList = useSelector((state) => state.user_reducer.categoryList);
     
     const addAccount = () => {
-        dispatch(createAccount({id: getRndInteger(1,2000),  price: getRndInteger(50000,2500000), isBought: false, accOwner: 'U' + getRndInteger(1000,2000)}));
+        dispatch(
+            createAccount(
+                {
+                    id: getRndInteger(1,2000),  
+                    price: getRndInteger(50000,2500000), isBought: false, accOwner: 'U' + getRndInteger(1000,2000)
+                }
+            )
+        );
     }
     const addCard = () => {
         dispatch(createCard({id: getRndInteger(1,2000),  carrier: 'Viettel', value: 50000 }));
@@ -22,12 +29,29 @@ const CardPage = ({context}) => {
     const addCategory = () => {
         dispatch(createCategory({name: getRndInteger(1,100), accNum: getRndInteger(1,1000), sellNum: getRndInteger(1,1000)}));
     }
+
+    const loadCategory = () => {
+        dispatch(fetchCategory())
+        .then(() => dispatch(setNotification("Tải lại thành công")));
+    }
+
+    const loadCard = () => {
+        dispatch(fetchCard())
+        .then(() => dispatch(setNotification("Tải lại thành công")));
+    }
+
+    const loadAccount = () => {
+        dispatch(fetchAccount())
+        .then(() => dispatch(setNotification("Tải lại thành công")));
+    }
     
     switch (context) {
         case "list":
             return(
                 <div className="card_page">
-                    <p> <b>Tài khoản game ({accList ? accList.length : 0})</b> </p>
+                    <p> <b>Tài khoản game ({accList ? accList.length : 0})</b> 
+                        <button type="button" className="card_menu_button refresh_button_user drop_shadow" onClick={loadAccount}> Tải Mới  </button>
+                    </p>
                     <div className="card_container">
                         {
                             accList != null && accList.length != 0? 
@@ -41,7 +65,10 @@ const CardPage = ({context}) => {
         case "category":
             return(
                 <div className="card_page">
-                    <p> <b>Danh mục game ({categoryList ? categoryList.length : 0})</b> </p>
+                    <p> <b>Danh mục game ({categoryList ? categoryList.length : 0})</b> 
+                        <button type="button" className="card_menu_button refresh_button_user drop_shadow" onClick={loadCategory}> Tải Mới  </button>
+                    </p>
+
                     <div className="card_container">
                         {
                             categoryList != null && categoryList.length != 0 ? 
@@ -56,7 +83,8 @@ const CardPage = ({context}) => {
             return(
                 <div className="card_page">
                     <p> <b>Quản lý danh mục game ({categoryList ? categoryList.length : 0})</b> 
-                        <button type="button" className="add_button drop_shadow" onClick={addCategory}> Thêm </button>
+                        <button type="button" className="card_menu_button drop_shadow" onClick={addCategory}> Thêm </button>
+                        <button type="button" className="card_menu_button refresh_button drop_shadow" onClick={loadCategory}> Tải Mới  </button>
                     </p>
                     <div className="card_container">
                         {
@@ -72,7 +100,8 @@ const CardPage = ({context}) => {
             return(
                 <div className="card_page">
                     <p> <b>Quản lý tài khoản game ({accList ? accList.length : 0})</b> 
-                        <button type="button" className="add_button drop_shadow" onClick={addAccount}> Thêm </button>
+                        <button type="button" className="card_menu_button drop_shadow" onClick={addAccount}> Thêm </button>
+                        <button type="button" className="card_menu_button refresh_button drop_shadow" onClick={loadCard}> Tải Mới  </button>
                     </p>
                     <div className="card_container">
                         {
@@ -88,7 +117,8 @@ const CardPage = ({context}) => {
             return(
                 <div className="card_page">
                     <p> <b>Quản lý thẻ nạp ({cardList ? cardList.length : 0})</b> 
-                        <button type="button" className="add_button drop_shadow" onClick={addCard}> Thêm </button>
+                        <button type="button" className="card_menu_button drop_shadow" onClick={addCard}> Thêm </button>
+                        <button type="button" className="card_menu_button refresh_button drop_shadow" onClick={loadCard}> Tải Mới  </button>
                     </p>
                     <div className="card_container">
                         {

@@ -12,7 +12,6 @@ const categoryUrl = 'https://gaming-account-shop.herokuapp.com/categories';
 const cardUrl = 'https://gaming-account-shop.herokuapp.com/cards';
 
 // user routes
-export const getUser = (userInfo) => axios.post(`${userUrl}/getUser/${userInfo}`, userInfo);
 export const createUser = (newUser) => axios.post(userUrl, newUser);
 export const login = (userInfo) => axios.post(`${userUrl}/${userInfo}`, userInfo);
 export const logout = (userInfo) => axios.post(`${userUrl}/logout/${userInfo}`, userInfo);

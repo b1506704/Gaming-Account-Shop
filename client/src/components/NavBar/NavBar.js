@@ -5,7 +5,8 @@ import Modal from '../Modal/Modal';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import CreditPage from '../CreditPage/CreditPage';
-import {logout, login, addCredit} from '../../actions/user_actions';
+import Notification from './Notification/Notification';
+import {logout, setNotification} from '../../actions/user_actions';
 import './NavBar.css';
 
 const NavBar = ({userMode, userName, balance}) => {
@@ -26,7 +27,7 @@ const NavBar = ({userMode, userName, balance}) => {
                         : <a onClick={() => {
                             modal.current.close();
                         }}>
-                            Trang chủ</a>
+                            Trang Chủ</a>
                     }
                     {
                         userMode != "user" 
@@ -37,11 +38,11 @@ const NavBar = ({userMode, userName, balance}) => {
                             setIsLoginPageOpen(false);
                             modal.current.open();
                         }}>
-                            Nạp thẻ</a>
+                            Nạp Thẻ</a>
                     }
                     {
                         userMode === "user" 
-                        ? <a style={{color: "yellow"}}> | {userName} | Số dư: {balance} VND|</a>
+                        ? <a style={{color: "yellow"}}> | {userName} | Số Dư: {balance} VND|</a>
                         : null
                     }
                     {
@@ -57,26 +58,25 @@ const NavBar = ({userMode, userName, balance}) => {
                             setIsLoginPageOpen(false);
                             modal.current.open();
                         }}>
-                            Đăng ký</a>
+                            Đăng Ký</a>
                         : null 
                     }
                     {
                         userMode === "admin" || userMode === "user" 
                         ? <a onClick={() => {
                             
-                            dispatch(logout(currentUserInfo));
-                            dispatch(login(null));
-                            dispatch(addCredit('',{}));
+                            dispatch(logout(currentUserInfo))
+                            .then(() => dispatch(setNotification("Đăng xuất thành công")));
                             modal.current.close();
                             }}>
-                            Đăng xuất</a> 
+                            Đăng Xuất</a> 
                         : <a onClick={() => {
                             setIsLoginPageOpen(true);
                             setIsCreditPageOpen(false);
                             setIsRegisterPageOpen(false);
                             modal.current.open();
                         }}>
-                            Đăng nhập</a> 
+                            Đăng Nhập</a> 
                     }
                 </nav>
             </div>
@@ -85,6 +85,7 @@ const NavBar = ({userMode, userName, balance}) => {
                 { isCreditPageOpen ? (<CreditPage close={() => modal.current.close()}/>) : null}
                 { isRegisterPageOpen ? (<RegisterPage close={() => modal.current.close()}/>) : null}
             </Modal>
+            <Notification/>
         </header>
     );
 }

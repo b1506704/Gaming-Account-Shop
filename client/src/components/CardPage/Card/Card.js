@@ -1,7 +1,7 @@
 import {React, useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
-import {buyAccount, filterAccount, deleteAccount, deleteCard, deleteCategory} from '../../../actions/user_actions';
+import {buyAccount, filterAccount, deleteAccount, deleteCard, deleteCategory, setNotification} from '../../../actions/user_actions';
 import './Card.css';
 import utaha from '../../../assets/imgs/utaha_01.jpg'; 
 
@@ -13,14 +13,21 @@ import utaha from '../../../assets/imgs/utaha_01.jpg';
 //isBought: tình trạng đã bán hay chưa của tài khoản
 //accNum: số tài khoản game hiện có
 //sellNum: số tài khoản game đã bán
-const Card = ({account, category, card, type, mode, setCurrentCardList, setCurrentAccList, setCurrentCategoryList}) => {
+const Card = ({account, category, card, type, mode}) => {
     const dispatch = useDispatch();
     const [isEdit, setIsEdit] = useState(false);
+    const isLogin = useSelector((state) => state.user_reducer.login);
+
     const onCardSelect = () => {
-      if (type === "acc") {
-        dispatch(buyAccount(account));
-      } else if (type === "category") {
+      if (type === "category") {
         dispatch(filterAccount(category.name));
+      }
+      if (type === "acc") {
+        if (isLogin === null || isLogin === undefined) {
+          dispatch(setNotification("Vui lòng đăng nhập!"));
+        } else {
+          dispatch(buyAccount(account));
+        } 
       }
     }
     const onCardEdit = () => {

@@ -1,7 +1,7 @@
 import { React, useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {addCredit} from '../../actions/user_actions';
+import {addCredit, setNotification} from '../../actions/user_actions';
 import './CreditPage.css';
 
 const CreditPage = ({close}) => {

@@ -1,88 +1,91 @@
 .card_detail {
-    position: relative;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    border: transparent;
-    background: #00010271;
-    user-select: none;
-    overflow-y: auto;
-    overflow-x: hidden;
-    min-height: 400px;
-    width: 310px;
-    border-radius: 10px;
-    margin-top: 25px;
-    font-weight: 1000;
-    margin-bottom: 25px;
-    transition: all 0.3s ease-in-out;
-  }
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  border: transparent;
+  background: #00010271;
+  user-select: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 400px;
+  width: 310px;
+  border-radius: 10px;
+  margin-top: 25px;
+  font-weight: 1000;
+  margin-bottom: 25px;
+  transition: all 0.3s ease-in-out;
+}
 .card_detail:hover {
-    background: #00010288;
-    transform: scale3d(1.05, 1.05, 0.5);
+  background: #00010288;
+  transform: scale3d(1.05, 1.05, 0.5);
 }
 .card_detail .title_bar {
-    position: absolute;
-    top: 5vh;
-    text-align: center;
-    border: transparent;
-    background: rgba(32, 34, 36, 0.4);
-    user-select: none;
-    overflow: hidden;
-    height: 40px; 
-    color: rgb(237, 243, 248);
-    font-size: 25px;
-    width: 100%;
-    z-index: 2;
-  }
+  position: absolute;
+  top: 5vh;
+  text-align: center;
+  border: transparent;
+  background: rgba(32, 34, 36, 0.4);
+  user-select: none;
+  overflow: hidden;
+  height: 40px; 
+  color: rgb(237, 243, 248);
+  font-size: 25px;
+  width: 100%;
+  z-index: 2;
+}
 .card_detail .card_button {
-    position: absolute;
-    opacity: 0.3;
-    bottom: 3vh;
-    text-align: center;
-    border: transparent;
-    background: rgba(50, 50, 51, 0.63);
-    user-select: none;
-    overflow: hidden;
-    height: 40px; 
-    color: rgb(255, 255, 255);
-    font-size: 25px;
-    width: 100%;
-    cursor: pointer;
-    z-index: 2;
+  position: absolute;
+  opacity: 0.3;
+  bottom: 3vh;
+  text-align: center;
+  border: transparent;
+  background: rgba(50, 50, 51, 0.63);
+  user-select: none;
+  overflow: hidden;
+  height: 40px; 
+  color: rgb(255, 255, 255);
+  font-size: 25px;
+  width: 100%;
+  cursor: pointer;
+  z-index: 2;
 }
+
 .edit_button {
-      bottom: 3vh !important;
+  bottom: 25vh !important;
 }
+
 .delete_button {
-  bottom: 10vh !important;
+  bottom: 32vh !important;
 }
+
 .card_detail .card_button:hover {
     opacity: 1;
     background: #00010288;
     text-shadow: 0 0 5px #fff, 0 0 10px #fff;
-  }
+}
   
 .acc_info {
-    position: absolute;
-    padding-top: 100px;
-    padding-bottom: 15px;
-    color: rgb(255, 255, 255);
-    height: 250px;
-    width: 100%;
-    bottom: 0vh;
-    overflow-y: auto;
-    background: transparent;
+  position: absolute;
+  padding-top: 100px;
+  padding-bottom: 15px;
+  color: rgb(255, 255, 255);
+  height: 250px;
+  width: 100%;
+  bottom: 0vh;
+  overflow-y: auto;
+  background: transparent;
   }  
 .acc_info div {
-    text-align: left;
-    margin-top: 8px;
-    font-size: 15px;
-    font-family: Subtitle;
-    letter-spacing: 0.5px;
-    padding-left: 20px;
-  }
+  text-align: left;
+  margin-top: 8px;
+  font-size: 15px;
+  font-family: Subtitle;
+  letter-spacing: 0.5px;
+  padding-left: 20px;
+}
 .acc_info div div {
-    padding-left: 0px;
+  padding-left: 0px;
 }
 .image_container {
   position: absolute;

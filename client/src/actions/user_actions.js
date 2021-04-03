@@ -14,57 +14,52 @@ import {
   CREATE_CARD,
   FETCH_CATEGORY,
   DELETE_CATEGORY,
-  CREATE_CATEGORY
+  CREATE_CATEGORY,
+  SET_NOTIFICATION
 } from '../constants/actionTypes';
 
 import * as api from '../api/index.js';
 
-//???
-export const getUser = (userInfo) => async (dispatch) => {
-  try {
-    const { data } = await api.getUser(userInfo);
-    dispatch({ type: GET_USER, payload: data});
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
 export const login = (userInfo) => async (dispatch) => {
   try {
     const { data } = await api.login(userInfo);
-    dispatch({ type: LOGIN_USER, payload: data});
-    // await dispatch(getUser(data));
+    await dispatch({ type: LOGIN_USER, payload: data});
+    await dispatch(setNotification("Đăng nhập thành công"));
   } catch (error) {
-    console.log(error.message);
+    dispatch(setNotification("Đăng nhập thất bại"));
   }
 };
 
 export const logout = (userInfo) => async (dispatch) => {
   try {
     const { data } = await api.logout(userInfo);
-    dispatch({ type: LOGOUT_USER, payload: data});
-    
+    await dispatch({ type: LOGOUT_USER, payload: data});
+    await dispatch({ type: ADD_CREDIT, payload: null});
   } catch (error) {
     console.log(error.message);
   }
 };
+
 export const register = (userInfo) => async (dispatch) => {
   try {
-    // gửi data lên server
     const { data } = await api.createUser(userInfo);
-    dispatch({ type: REGISTER_USER, payload: data});
+    await dispatch({ type: REGISTER_USER, payload: data});
+    await dispatch(setNotification("Đăng ký thành công"));
   } catch (error) {
-    console.log(error.message);
+    dispatch(setNotification("Đăng ký thất bại"));
   }
 };
+
 export const addCredit = (userName, creditInfo) => async (dispatch) => {
   try {
     const { data } = await api.addCredit(userName, creditInfo);
-    dispatch({ type: ADD_CREDIT, payload: data});
+    await dispatch({ type: ADD_CREDIT, payload: data});
+    await dispatch(setNotification("Nạp thẻ thành công"));
   } catch (error) {
-    console.log(error.message);
+    dispatch(setNotification("Nạp thẻ thất bại"));
   }
 };
+
 export const fetchAccount = () => async (dispatch) => {
   try {
     const { data } = await api.fetchAccount();
@@ -73,25 +68,29 @@ export const fetchAccount = () => async (dispatch) => {
     console.log(error.message);
   }
 };
+
 export const deleteAccount = (id) => async (dispatch) => {
   try {
     const { data } = await api.deleteAccount(id);
     await dispatch({ type: DELETE_ACCOUNT, payload: data});
     await dispatch(fetchAccount());
-    
+    await dispatch(setNotification("Xóa hoàn tất"));
   } catch (error) {
-    console.log(error.message);
+    dispatch(setNotification("Xóa thất bại"));
   }
 };
+
 export const createAccount = (accInfo) => async (dispatch) => {
   try {
     const { data } = await api.createAccount(accInfo);
     await dispatch({ type: CREATE_ACCOUNT, payload: data});
     await dispatch(fetchAccount());
+    await dispatch(setNotification("Thêm hoàn tất"));
   } catch (error) {
-    console.log(error.message);
+    dispatch(setNotification("Thêm thất bại"));
   }
 };
+
 export const fetchCard = () => async (dispatch) => {
   try {
     const { data } = await api.fetchCard();
@@ -100,22 +99,26 @@ export const fetchCard = () => async (dispatch) => {
     console.log(error.message);
   }
 };
+
 export const deleteCard = (id) => async (dispatch) => {
   try {
     const { data } = await api.deleteCard(id);
     await dispatch({ type: DELETE_CARD, payload: data});
     await dispatch(fetchCard());
+    await dispatch(setNotification("Xóa hoàn tất"));
   } catch (error) {
-    console.log(error.message);
+    dispatch(setNotification("Xóa thất bại"));
   }
 };
+
 export const createCard = (cardInfo) => async (dispatch) => {
   try {
     const { data } = await api.createCard(cardInfo);
     await dispatch({ type: CREATE_CARD, payload: data});
     await dispatch(fetchCard());
+    await dispatch(setNotification("Thêm hoàn tất"));
   } catch (error) {
-    console.log(error.message);
+    dispatch(setNotification("Thêm thất bại"));
   }
 };
 //category action
@@ -127,35 +130,50 @@ export const fetchCategory = () => async (dispatch) => {
     console.log(error.message);
   }
 };
+
 export const deleteCategory = (name) => async (dispatch) => {
   try {
     const { data } = await api.deleteCategory(name);
     await dispatch({ type: DELETE_CATEGORY, payload: data});
     await dispatch(fetchCategory());
+    await dispatch(setNotification("Xóa hoàn tất"));
   } catch (error) {
-    console.log(error.message);
+    dispatch(setNotification("Xóa thất bại"));
   }
 };
+
 export const createCategory = (categoryInfo) => async (dispatch) => {
   try {
     const { data } = await api.createCategory(categoryInfo);
     await dispatch({ type: CREATE_CATEGORY, payload: data});
     await dispatch(fetchCategory());
+    await dispatch(setNotification("Thêm hoàn tất"));
   } catch (error) {
-    console.log(error.message);
+    dispatch(setNotification("Thêm thất bại"));
   }
 };
+
 export const buyAccount = (accInfo) => async (dispatch) => {
   try {
-    //
-    dispatch({ type: BUY_ACCOUNT, payload: accInfo});
+    await dispatch({ type: BUY_ACCOUNT, payload: accInfo});
+    await dispatch(setNotification("Mua hoàn tất"));
+  } catch (error) {
+    dispatch(setNotification("Mua thất bại"));
+  }
+};
+
+export const filterAccount = (categoryName) => async (dispatch) => {
+  try {
+    await dispatch({ type: FILTER_ACCOUNT, payload: categoryName});
+    await dispatch(setNotification("Lọc thành công"));
   } catch (error) {
     console.log(error.message);
   }
 };
-export const filterAccount = (categoryName) => async (dispatch) => {
+
+export const setNotification = (notification) => async (dispatch) => {
   try {
-    dispatch({ type: FILTER_ACCOUNT, payload: categoryName});
+    dispatch({ type: SET_NOTIFICATION, payload: notification});
   } catch (error) {
     console.log(error.message);
   }

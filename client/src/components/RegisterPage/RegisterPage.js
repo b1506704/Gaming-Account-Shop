@@ -8,7 +8,8 @@ const RegisterPage = ({close}) => {
     const dispatch = useDispatch();
     const [userInfo, setUserInfo] = useState({
         userName: '',
-        passWord: ''
+        passWord: '',
+        phoneNumber: 0
     });
     const modalRef = useRef();
 
@@ -33,20 +34,24 @@ const RegisterPage = ({close}) => {
         });
       };
     return(
-        <div className="login_container drop_shadow">
+        <div className="register_container drop_shadow">
             <div ref={modalRef} className="scroll_position_holder"></div>
             <h1>Đăng ký</h1>
             <form onSubmit={(e) => {
                     e.preventDefault();
-                    setUserInfo({userName: e.target.username.value, passWord:e.target.password.value});
+                    setUserInfo({userName: e.target.username.value, passWord:e.target.password.value, phoneNumber: e.target.phone.value});
                 }}>
                 <div>
                     <label>Tên đăng ký:</label>
                     <input type="text" autoFocus={true} name="username"></input>
                 </div>
                 <div>
-                    <label>Mật khẩu:</label>
-                    <input type="password" name="password"></input>
+                    <label>Mật khẩu </label>
+                     <input type="password" name="password" placeholder="<=12 ký tự"></input>
+                </div>
+                <div>
+                    <label>Số điện thoại:</label>
+                    <input type="tel" name="phone"></input>
                 </div>
                 <div className="button_container">
                     <input type="submit" className="drop_shadow neon_effect" value="Đăng ký" onClick={handleRegister}></input>

@@ -33,7 +33,6 @@ const App = () => {
     const storeState = useSelector ((state) => state.user_reducer);
     const loginInfo = useSelector((state) => state.user_reducer.login);
     const currentBalance = useSelector((state) => state.user_reducer.credit);
-    // const isLogout = useSelector((state) => state.user_reducer.isLogout);
     console.log(storeState);
     
     if (loginInfo!= null && loginInfo.isAdmin === true) {

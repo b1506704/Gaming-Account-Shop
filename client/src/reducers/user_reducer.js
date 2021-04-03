@@ -14,7 +14,8 @@ import {
   DELETE_CARD,
   CREATE_CATEGORY,
   FETCH_CATEGORY,
-  DELETE_CATEGORY
+  DELETE_CATEGORY,
+  SET_NOTIFICATION
 } from '../constants/actionTypes';
 
 export default (state = {}, action) => {
@@ -26,7 +27,7 @@ export default (state = {}, action) => {
     case GET_USER:
         return { ...state, user: action.payload }
     case LOGOUT_USER:
-        return { ...state, isLogout: action.payload}  
+        return { ...state, login: action.payload}  
     case FETCH_ACCOUNT:
         return { ...state, accountList: action.payload }
     case DELETE_ACCOUNT:
@@ -55,6 +56,8 @@ export default (state = {}, action) => {
         return { ...state, credit: action.payload}
     case FILTER_ACCOUNT:
         return { ...state, filterCategory: action.payload}
+    case SET_NOTIFICATION:
+        return { ...state, notif: action.payload}
     default:
         return state;
   }
