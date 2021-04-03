@@ -14,6 +14,17 @@ export const getUsers = async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 }
+//???
+export const getUser = async (req, res) => { 
+    const { userName } = req.body;
+
+    try {
+        const user = await User.findOne({userName: userName});
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
 
 export const login = async (req, res) => { 
     const { userName, passWord } = req.body;

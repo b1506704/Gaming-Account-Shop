@@ -13,10 +13,9 @@ import utaha from '../../../assets/imgs/utaha_01.jpg';
 //isBought: tình trạng đã bán hay chưa của tài khoản
 //accNum: số tài khoản game hiện có
 //sellNum: số tài khoản game đã bán
-const Card = ({account, category, card, type, mode}) => {
+const Card = ({account, category, card, type, mode, setCurrentCardList, setCurrentAccList, setCurrentCategoryList}) => {
     const dispatch = useDispatch();
-    const [isEdit, setIsEdit] =useState(false);
-    
+    const [isEdit, setIsEdit] = useState(false);
     const onCardSelect = () => {
       if (type === "acc") {
         dispatch(buyAccount(account));
@@ -27,6 +26,7 @@ const Card = ({account, category, card, type, mode}) => {
     const onCardEdit = () => {
       setIsEdit(true);
     }
+
     const onCardDelete = () => {
       if (type === "acc") {
         dispatch(deleteAccount(account.id));
@@ -39,7 +39,7 @@ const Card = ({account, category, card, type, mode}) => {
     return (
       <div className="card_detail drop_shadow">
         <div className="title_bar drop_shadow">
-          { type === "acc" ? '#' + account.id : type === "category" ? category.name : type ==="card" ? '#' + card.id : null }            
+          { type === "acc" ? '#' + account.id : type === "category" ? '#' + category.name : type ==="card" ? '#' + card.id : null }            
         </div>
         { 
           type === "acc" 

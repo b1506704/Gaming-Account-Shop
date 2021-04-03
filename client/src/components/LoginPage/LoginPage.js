@@ -1,7 +1,7 @@
 import { React, useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
-import {login} from '../../actions/user_actions';
+import {login, getUser} from '../../actions/user_actions';
 import './LoginPage.css';
 
 const LoginPage = ({close}) => {

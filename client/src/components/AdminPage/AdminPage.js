@@ -8,14 +8,14 @@ import EditCreditList from '../EditCreditList/EditCreditList';
 import Footer from '../Footer/Footer';
 import './AdminPage.css';
 
-const AdminPage = ({userName, setCurrentAccList, setCurrentCardList, setCurrentCategoryList}) => {
+const AdminPage = ({userName}) => {
     return(
         <div>
             <NavBar userName={userName} userMode="admin"/>
             <HeadingTitle title="Admin Panel" subtitle="Trang quản lý cơ sở dữ liệu"/>
-            <EditCreditList setCurrentCardList={setCurrentCardList}/>
-            <EditAccountCategory setCurrentCategoryList={setCurrentCategoryList}/>
-            <EditAccountList setCurrentAccList={setCurrentAccList}/>
+            <EditCreditList/>
+            <EditAccountCategory/>
+            <EditAccountList/>
             <Footer/>
         </div>
     );

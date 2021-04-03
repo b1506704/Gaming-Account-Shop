@@ -41,9 +41,9 @@ const CreditPage = ({close}) => {
 
     useEffect(() => {
         if (creditInfo.id != '') {
-            dispatch(addCredit(currentUserName ,creditInfo));
+            dispatch(addCredit(currentUserName, creditInfo));
         }
-    },[creditInfo, setCreditInfo]);
+    },[creditInfo]);
 
     
 

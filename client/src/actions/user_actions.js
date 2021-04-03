@@ -1,5 +1,6 @@
 import {
   LOGIN_USER,
+  GET_USER,
   REGISTER_USER,
   ADD_CREDIT,
   FETCH_ACCOUNT,
@@ -18,15 +19,26 @@ import {
 
 import * as api from '../api/index.js';
 
-export const login = (userInfo) => async (dispatch) => {
+//???
+export const getUser = (userInfo) => async (dispatch) => {
   try {
-    const { data } = await api.login(userInfo);
-    dispatch({ type: LOGIN_USER, payload: data});
-    
+    const { data } = await api.getUser(userInfo);
+    dispatch({ type: GET_USER, payload: data});
   } catch (error) {
     console.log(error.message);
   }
 };
+
+export const login = (userInfo) => async (dispatch) => {
+  try {
+    const { data } = await api.login(userInfo);
+    dispatch({ type: LOGIN_USER, payload: data});
+    // await dispatch(getUser(data));
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 export const logout = (userInfo) => async (dispatch) => {
   try {
     const { data } = await api.logout(userInfo);
@@ -64,7 +76,9 @@ export const fetchAccount = () => async (dispatch) => {
 export const deleteAccount = (id) => async (dispatch) => {
   try {
     const { data } = await api.deleteAccount(id);
-    dispatch({ type: DELETE_ACCOUNT, payload: data});
+    await dispatch({ type: DELETE_ACCOUNT, payload: data});
+    await dispatch(fetchAccount());
+    
   } catch (error) {
     console.log(error.message);
   }
@@ -72,8 +86,8 @@ export const deleteAccount = (id) => async (dispatch) => {
 export const createAccount = (accInfo) => async (dispatch) => {
   try {
     const { data } = await api.createAccount(accInfo);
-    // dispatch({ type: CREATE_ACCOUNT, payload: data});
-    dispatch({ type: CREATE_ACCOUNT, payload: data});
+    await dispatch({ type: CREATE_ACCOUNT, payload: data});
+    await dispatch(fetchAccount());
   } catch (error) {
     console.log(error.message);
   }
@@ -89,7 +103,8 @@ export const fetchCard = () => async (dispatch) => {
 export const deleteCard = (id) => async (dispatch) => {
   try {
     const { data } = await api.deleteCard(id);
-    dispatch({ type: DELETE_CARD, payload: data});
+    await dispatch({ type: DELETE_CARD, payload: data});
+    await dispatch(fetchCard());
   } catch (error) {
     console.log(error.message);
   }
@@ -97,7 +112,8 @@ export const deleteCard = (id) => async (dispatch) => {
 export const createCard = (cardInfo) => async (dispatch) => {
   try {
     const { data } = await api.createCard(cardInfo);
-    dispatch({ type: CREATE_CARD, payload: data});
+    await dispatch({ type: CREATE_CARD, payload: data});
+    await dispatch(fetchCard());
   } catch (error) {
     console.log(error.message);
   }
@@ -114,7 +130,8 @@ export const fetchCategory = () => async (dispatch) => {
 export const deleteCategory = (name) => async (dispatch) => {
   try {
     const { data } = await api.deleteCategory(name);
-    dispatch({ type: DELETE_CATEGORY, payload: data});
+    await dispatch({ type: DELETE_CATEGORY, payload: data});
+    await dispatch(fetchCategory());
   } catch (error) {
     console.log(error.message);
   }
@@ -122,7 +139,8 @@ export const deleteCategory = (name) => async (dispatch) => {
 export const createCategory = (categoryInfo) => async (dispatch) => {
   try {
     const { data } = await api.createCategory(categoryInfo);
-    dispatch({ type: CREATE_CATEGORY, payload: data});
+    await dispatch({ type: CREATE_CATEGORY, payload: data});
+    await dispatch(fetchCategory());
   } catch (error) {
     console.log(error.message);
   }

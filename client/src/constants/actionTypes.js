@@ -1,4 +1,5 @@
 export const LOGIN_USER = 'login_user';
+export const GET_USER = 'login_user';
 export const REGISTER_USER = 'register_user';
 export const ADD_CREDIT = 'add_credit';
 export const BUY_ACCOUNT = 'buy_account';
