@@ -1,10 +1,21 @@
 import {React, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-
-import {buyAccount, filterAccount, deleteAccount, deleteCard, deleteCategory, setNotification} from '../../../actions/user_actions';
+import LoadingContainer from '../../../utils/LoadingContainer/LoadingContainer';
+import {
+  buyAccount, 
+  filterAccount, 
+  deleteAccount, 
+  deleteCard, 
+  deleteCategory, 
+  setNotification,
+  updateAccount,
+  updateCategory
+} from '../../../actions/user_actions';
+import getRndInteger from '../../../utils/RandomGenerator';
 import './Card.css';
-import utaha from '../../../assets/imgs/utaha_01.jpg'; 
-
+import viettel from '../../../assets/imgs/viettel.png'; 
+import mobifone from '../../../assets/imgs/mobi.png'
+import vinaphone from '../../../assets/imgs/vina.png'
 //id: id của tài khoản game 
 //name: tên của danh mục game
 //price: giá của tài khoản game
@@ -17,7 +28,20 @@ const Card = ({account, category, card, type, mode}) => {
     const dispatch = useDispatch();
     const [isEdit, setIsEdit] = useState(false);
     const currentLoginUser = useSelector((state) => state.user_reducer.login);
-
+    const url = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLAAAABMCAYAAAB9Pk6+AAACJUlEQVR42u3YQQEAMAgAIU2+6K7GPSAGe3NvAAAAACBqBRYAAAAAZQILAAAAgDSBBQAAAECawAIAAAAgTWABAAAAkCawAAAAAEgTWAAAAACkCSwAAAAA0gQWAAAAAGkCCwAAAIA0gQUAAABAmsACAAAAIE1gAQAAAJAmsAAAAABIE1gAAAAApAksAAAAANIEFgAAAABpAgsAAACANIEFAAAAQJrAAgAAACBNYAEAAACQJrAAAAAASBNYAAAAAKQJLAAAAADSBBYAAAAAaQILAAAAgDSBBQAAAECawAIAAAAgTWABAAAAkCawAAAAAEgTWAAAAACkCSwAAAAA0gQWAAAAAGkCCwAAAIA0gQUAAABAmsACAAAAIE1gAQAAAJAmsAAAAABIE1gAAAAApAksAAAAANIEFgAAAABpAgsAAACANIEFAAAAQJrAAgAAACBNYAEAAACQJrAAAAAASBNYAAAAAKQJLAAAAADSBBYAAAAAaQILAAAAgDSBBQAAAECawAIAAAAgTWABAAAAkCawAAAAAEgTWAAAAACkCSwAAAAA0gQWAAAAAGkCCwAAAIA0gQUAAABAmsACAAAAIE1gAQAAAJAmsAAAAABIE1gAAAAApAksAAAAANIEFgAAAABpAgsAAACANIEFAAAAQJrAAgAAACBNYAEAAACQJrAAAAAASBNYAAAAAKQJLAAAAADSBBYAAAAAaQILAAAAgDSBBQAAAEDaBznpvWmqACQLAAAAAElFTkSuQmCC";
+    const sampleAcc = {
+      price: getRndInteger(50000, 2500000),
+      category: '01',
+      imgUrl: url,
+      attr1: getRndInteger(1,100),
+      attr2: getRndInteger(1,7),
+      attr3: getRndInteger(1,100),
+      attr4: getRndInteger(1,100)
+    };
+    const sampleCategory = {
+      name: getRndInteger(1,100),
+      imgUrl: url,
+    };
     const onCardSelect = () => {
       if (type === "category") {
         dispatch(filterAccount(category.name));
@@ -32,6 +56,13 @@ const Card = ({account, category, card, type, mode}) => {
     }
     const onCardEdit = () => {
       setIsEdit(true);
+      if (type === "acc") {
+        dispatch(updateAccount(account.id, sampleAcc));
+      } else if(type === "category") {
+        dispatch(updateCategory(category.name, sampleCategory));
+      } else if(type === "card") {
+
+      }
     }
 
     const onCardDelete = () => {
@@ -51,7 +82,7 @@ const Card = ({account, category, card, type, mode}) => {
         { 
           type === "acc" 
           ? <div className="acc_info">
-              <div> Game: </div>
+              <div> Game: {account.category}</div>
               <div> Giá: {account.price} VND </div>
               {
                 mode === "edit"
@@ -61,10 +92,10 @@ const Card = ({account, category, card, type, mode}) => {
                   </div>
                 : null
               }
-              <div> Thuộc tính 1: </div>
-              <div> Thuộc tính 2: </div>
-              <div> Thuộc tính 3: </div>
-              <div> Thuộc tính 4: </div>
+              <div> Tên trong game: {account.attr1} </div>
+              <div> Rank/Level: {account.attr2}</div>
+              <div> Cấp pet: {account.attr3}</div>
+              <div> Mô tả phụ: {account.attr4}</div>
               
             </div>
           : type === "category" 
@@ -95,7 +126,14 @@ const Card = ({account, category, card, type, mode}) => {
             </>
         }
         <div className="image_container">
-          <img className="image" alt="Loading..." src={utaha}/>
+          { type === "acc" && account.imgUrl ? 
+            (<img className="image" alt="Loading..." src={account.imgUrl}/>)
+            : type === "category" && category.imgUrl ?
+            (<img className="image" alt="Loading..." src={category.imgUrl}/>) 
+          : type === "card" ?
+            (<img className="image" alt="Loading..." src={viettel}/>)  
+          : (<LoadingContainer style="spinner"/>)
+          }
         </div>
       </div>
     );

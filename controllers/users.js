@@ -44,7 +44,6 @@ export const logout = async (req, res) => {
 
 export const createUser = async (req, res) => {
     const { userName, passWord, phoneNumber } = req.body;
-
     const newUser = new User({ userName, passWord, phoneNumber });
 
     try {
@@ -63,7 +62,6 @@ export const addCredit = async (req, res) => {
         const card = await Card.findOne({id, carrier, value});
         if (card.isBought === false) {
             const updatedCard = await Card.findOneAndUpdate({id: id, carrier: carrier, value: value},{isBought: true}, {new: true});
-            
             const updatedUser = await User.findOneAndUpdate({userName: userName},{balance: user.balance + updatedCard.value}, {new: true});
             res.status(200).json(updatedUser.balance);
         } else {
@@ -77,7 +75,6 @@ export const addCredit = async (req, res) => {
 export const buyAccount = async (req, res) => { 
     const { userName } = req.params;
     const { id } = req.body;
-    //check
     try {
         const user = await User.findOne({userName: userName});
         const account = await Account.findOne({id});

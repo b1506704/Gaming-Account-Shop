@@ -12,22 +12,30 @@ const CardPage = ({context}) => {
     const accList = useSelector((state) => state.user_reducer.accountList);
     const cardList = useSelector((state) => state.user_reducer.cardList);
     const categoryList = useSelector((state) => state.user_reducer.categoryList);
-    
+    const url = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLAAAABMCAYAAAB9Pk6+AAACJUlEQVR42u3YQQEAMAgAIU2+6K7GPSAGe3NvAAAAACBqBRYAAAAAZQILAAAAgDSBBQAAAECawAIAAAAgTWABAAAAkCawAAAAAEgTWAAAAACkCSwAAAAA0gQWAAAAAGkCCwAAAIA0gQUAAABAmsACAAAAIE1gAQAAAJAmsAAAAABIE1gAAAAApAksAAAAANIEFgAAAABpAgsAAACANIEFAAAAQJrAAgAAACBNYAEAAACQJrAAAAAASBNYAAAAAKQJLAAAAADSBBYAAAAAaQILAAAAgDSBBQAAAECawAIAAAAgTWABAAAAkCawAAAAAEgTWAAAAACkCSwAAAAA0gQWAAAAAGkCCwAAAIA0gQUAAABAmsACAAAAIE1gAQAAAJAmsAAAAABIE1gAAAAApAksAAAAANIEFgAAAABpAgsAAACANIEFAAAAQJrAAgAAACBNYAEAAACQJrAAAAAASBNYAAAAAKQJLAAAAADSBBYAAAAAaQILAAAAgDSBBQAAAECawAIAAAAgTWABAAAAkCawAAAAAEgTWAAAAACkCSwAAAAA0gQWAAAAAGkCCwAAAIA0gQUAAABAmsACAAAAIE1gAQAAAJAmsAAAAABIE1gAAAAApAksAAAAANIEFgAAAABpAgsAAACANIEFAAAAQJrAAgAAACBNYAEAAACQJrAAAAAASBNYAAAAAKQJLAAAAADSBBYAAAAAaQILAAAAgDSBBQAAAEDaBznpvWmqACQLAAAAAElFTkSuQmCC";
     const addAccount = () => {
         dispatch(
             createAccount(
                 {
                     id: getRndInteger(1,2000),  
-                    price: getRndInteger(50000,2500000), isBought: false, accOwner: ''
+                    price: getRndInteger(50000,2500000),
+                    category: categoryList !=null && categoryList.length!= 0 ? categoryList[getRndInteger(0,  categoryList.length - 1)].name : null,
+                    imgUrl: url,
+                    isBought: false, 
+                    accOwner: '',
+                    attr1: getRndInteger(1,100),
+                    attr2: getRndInteger(1,7),
+                    attr3: getRndInteger(1,100),
+                    attr4: getRndInteger(1,100)
                 }
             )
         );
     }
     const addCard = () => {
-        dispatch(createCard({id: getRndInteger(1,2000),  carrier: 'Viettel', value: 50000 }));
+        dispatch(createCard({id: getRndInteger(1,2000),  carrier: 'Viettel' || 'Mobifone' || 'Vinaphone', value: 50000 || 100000 || 1000000 }));
     }
     const addCategory = () => {
-        dispatch(createCategory({name: getRndInteger(1,100), accNum: 0, sellNum: 0}));
+        dispatch(createCategory({name: getRndInteger(1,100), imgUrl: url, accNum: 0, sellNum: 0}));
     }
 
     const loadCategory = () => {

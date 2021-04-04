@@ -7,6 +7,7 @@ import {
   BUY_ACCOUNT,
   FILTER_ACCOUNT,
   CREATE_ACCOUNT,
+  UPDATE_ACCOUNT,
   LOGOUT_USER,
   FETCH_CARD,
   DELETE_CARD,
@@ -14,7 +15,8 @@ import {
   FETCH_CATEGORY,
   DELETE_CATEGORY,
   CREATE_CATEGORY,
-  SET_NOTIFICATION
+  UPDATE_CATEGORY,
+  SET_NOTIFICATION,
 } from '../constants/actionTypes';
 
 import * as api from '../api/index.js';
@@ -89,6 +91,17 @@ export const deleteAccount = (id) => async (dispatch) => {
   }
 };
 
+export const updateAccount = (id, accountInfo) => async (dispatch) => {
+  try {
+    const { data } = await api.updateAccount(id, accountInfo);
+    await dispatch({ type: UPDATE_ACCOUNT, payload: data});
+    await dispatch(fetchAccount());
+    await dispatch(setNotification("Cập nhật hoàn tất"));
+  } catch (error) {
+    dispatch(setNotification("Cập nhật thất bại"));
+  }
+};
+
 export const createAccount = (accInfo) => async (dispatch) => {
   try {
     const { data } = await api.createAccount(accInfo);
@@ -159,6 +172,17 @@ export const createCategory = (categoryInfo) => async (dispatch) => {
     await dispatch(setNotification("Thêm hoàn tất"));
   } catch (error) {
     dispatch(setNotification("Thêm thất bại"));
+  }
+};
+
+export const updateCategory = (name, categoryInfo) => async (dispatch) => {
+  try {
+    const { data } = await api.updateCategory(name, categoryInfo);
+    await dispatch({ type: UPDATE_CATEGORY, payload: data});
+    await dispatch(fetchCategory());
+    await dispatch(setNotification("Cập nhật hoàn tất"));
+  } catch (error) {
+    dispatch(setNotification("Cập nhật thất bại"));
   }
 };
 

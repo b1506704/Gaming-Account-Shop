@@ -14,7 +14,9 @@ import {
   CREATE_CATEGORY,
   FETCH_CATEGORY,
   DELETE_CATEGORY,
-  SET_NOTIFICATION
+  UPDATE_CATEGORY,
+  SET_NOTIFICATION,
+  UPDATE_ACCOUNT
 } from '../constants/actionTypes';
 
 export default (state = {}, action) => {
@@ -36,6 +38,8 @@ export default (state = {}, action) => {
             ...state, 
                 accountList:[...state.accountList, action.payload]
             }
+    case UPDATE_ACCOUNT:
+        return { ...state, updatedAcc: action.payload}            
     case BUY_ACCOUNT:
         return { ...state, credit: action.payload }
     case FETCH_CARD:
@@ -49,7 +53,9 @@ export default (state = {}, action) => {
     case DELETE_CATEGORY:
         return { ...state, deleteCategory: action.payload }
     case CREATE_CATEGORY:
-        return { ...state, createdCategory: action.payload }        
+        return { ...state, createdCategory: action.payload }
+    case UPDATE_CATEGORY:
+        return { ...state, updatedCategory: action.payload}                    
     case ADD_CREDIT:
         return { ...state, credit: action.payload}
     case FILTER_ACCOUNT:

@@ -25,15 +25,51 @@ export const deleteAccount = async (req, res) => {
 }
 
 export const createAccount = async (req, res) => {
-    const { id, price, isBought, accOwner } = req.body;
+    const { id, price, category, imgUrl, isBought, accOwner, attr1, attr2, attr3, attr4 } = req.body;
 
-    const newAccount = new Account({ id: id, price:price, isBought:isBought, accOwner:accOwner });
+    const newAccount = new Account(
+        { 
+            id: id, 
+            price:price,
+            category: category,
+            imgUrl: imgUrl, 
+            isBought:isBought,
+            accOwner:accOwner, 
+            attr1: attr1, 
+            attr2: attr2, 
+            attr3: attr3, 
+            attr4: attr4 
+        }
+    );
 
     try {
         await newAccount.save();
         res.status(201).json(newAccount);
     } catch (error) {
         res.status(409).json({ message: error.message });
+    }
+}
+
+export const updateAccount = async (req, res) => { 
+    const { id } = req.params;
+    const { price, category, imgUrl, attr1, attr2, attr3, attr4 } = req.body;
+    try {
+        const account = await Account.findOne({id: id});
+        const updatedAccount = await Account.findOneAndUpdate(
+            {id: account.id},
+            {
+                price, 
+                category, 
+                imgUrl, 
+                attr1, 
+                attr2, 
+                attr3, 
+                attr4},
+            {new: true}
+        );
+        res.status(200).json(updatedAccount);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
     }
 }
 

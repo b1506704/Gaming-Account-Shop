@@ -22,6 +22,7 @@ export const buyAccount = (userName, accInfo) => axios.post(`${userUrl}/buyAccou
 export const fetchAccount = () => axios.get(accountUrl);
 export const createAccount = (newAccount) => axios.post(accountUrl, newAccount);
 export const deleteAccount = (id) => axios.delete(`${accountUrl}/${id}`);
+export const updateAccount = (id, toUpdateAcc) => axios.post(`${accountUrl}/updateAccount/${id}`, toUpdateAcc);
 // card
 export const createCard = (newCard) => axios.post(cardUrl, newCard);
 export const fetchCard = () => axios.get(cardUrl);
@@ -30,3 +31,4 @@ export const deleteCard = (id) => axios.delete(`${cardUrl}/${id}`);
 export const createCategory = (newCategory) => axios.post(categoryUrl, newCategory);
 export const fetchCategory = () => axios.get(categoryUrl);
 export const deleteCategory = (name) => axios.delete(`${categoryUrl}/${name}`);
+export const updateCategory = (name, toUpdateCategory) => axios.post(`${categoryUrl}/updateCategory/${name}`, toUpdateCategory);

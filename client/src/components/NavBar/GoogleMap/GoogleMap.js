@@ -12,7 +12,7 @@ const GoogleMap = () => {
 
     return(
         <div className="map_container drop_shadow">
-            <h2> Liên hệ </h2>
+            <h2> Liên hệ shop </h2>
             <GoogleMapReact
                 bootstrapURLKeys= {{key: 'AIzaSyBi33ikA-UNokHaz0abercTBz2bOjjdh38'}}
                 defaultCenter={location}
