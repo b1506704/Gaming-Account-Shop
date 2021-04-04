@@ -24,17 +24,6 @@ export const deleteAccount = async (req, res) => {
     }
 }
 
-export const getAccount = async (req, res) => { 
-    const { id } = req.params;
-
-    try {
-        const account = await Account.findOne({id: id});
-        res.status(200).json(account);
-    } catch (error) {
-        res.status(404).json({ message: error.message });
-    }
-}
-//todo
 export const createAccount = async (req, res) => {
     const { id, price, isBought, accOwner } = req.body;
 

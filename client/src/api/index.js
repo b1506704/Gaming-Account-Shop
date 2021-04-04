@@ -16,6 +16,7 @@ export const createUser = (newUser) => axios.post(userUrl, newUser);
 export const login = (userInfo) => axios.post(`${userUrl}/${userInfo}`, userInfo);
 export const logout = (userInfo) => axios.post(`${userUrl}/logout/${userInfo}`, userInfo);
 export const addCredit = (userName, creditInfo) => axios.post(`${userUrl}/addCredit/${userName}`, creditInfo);
+export const buyAccount = (userName, accInfo) => axios.post(`${userUrl}/buyAccount/${userName}`, accInfo);
 // admin routes
 // account
 export const fetchAccount = () => axios.get(accountUrl);

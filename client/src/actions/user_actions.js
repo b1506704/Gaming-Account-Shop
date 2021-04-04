@@ -1,6 +1,5 @@
 import {
   LOGIN_USER,
-  GET_USER,
   REGISTER_USER,
   ADD_CREDIT,
   FETCH_ACCOUNT,
@@ -44,7 +43,7 @@ export const register = (userInfo) => async (dispatch) => {
   try {
     const { data } = await api.createUser(userInfo);
     await dispatch({ type: REGISTER_USER, payload: data});
-    await dispatch(setNotification(`Đăng ký thành công với username: ${data.userName}`));
+    await dispatch(setNotification(`Đăng ký thành công`));
   } catch (error) {
     dispatch(setNotification("Đăng ký thất bại"));
   }
@@ -57,6 +56,16 @@ export const addCredit = (userName, creditInfo) => async (dispatch) => {
     await dispatch(setNotification("Nạp thẻ thành công"));
   } catch (error) {
     dispatch(setNotification("Nạp thẻ thất bại"));
+  }
+};
+
+export const buyAccount = (userName, accInfo) => async (dispatch) => {
+  try {
+    const { data } = await api.buyAccount(userName, accInfo);
+    await dispatch({ type: BUY_ACCOUNT, payload: data});
+    await dispatch(setNotification("Mua thành công"));
+  } catch (error) {
+    dispatch(setNotification("Mua thất bại"));
   }
 };
 
@@ -153,19 +162,10 @@ export const createCategory = (categoryInfo) => async (dispatch) => {
   }
 };
 
-export const buyAccount = (accInfo) => async (dispatch) => {
-  try {
-    await dispatch({ type: BUY_ACCOUNT, payload: accInfo});
-    await dispatch(setNotification("Mua hoàn tất"));
-  } catch (error) {
-    dispatch(setNotification("Mua thất bại"));
-  }
-};
-
 export const filterAccount = (categoryName) => async (dispatch) => {
   try {
     await dispatch({ type: FILTER_ACCOUNT, payload: categoryName});
-    await dispatch(setNotification("Lọc thành công"));
+    await dispatch(setNotification(`Lọc theo ${categoryName} `));
   } catch (error) {
     console.log(error.message);
   }

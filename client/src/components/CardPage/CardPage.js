@@ -18,7 +18,7 @@ const CardPage = ({context}) => {
             createAccount(
                 {
                     id: getRndInteger(1,2000),  
-                    price: getRndInteger(50000,2500000), isBought: false, accOwner: 'U' + getRndInteger(1000,2000)
+                    price: getRndInteger(50000,2500000), isBought: false, accOwner: ''
                 }
             )
         );
@@ -27,7 +27,7 @@ const CardPage = ({context}) => {
         dispatch(createCard({id: getRndInteger(1,2000),  carrier: 'Viettel', value: 50000 }));
     }
     const addCategory = () => {
-        dispatch(createCategory({name: getRndInteger(1,100), accNum: getRndInteger(1,1000), sellNum: getRndInteger(1,1000)}));
+        dispatch(createCategory({name: getRndInteger(1,100), accNum: 0, sellNum: 0}));
     }
 
     const loadCategory = () => {
@@ -101,7 +101,7 @@ const CardPage = ({context}) => {
                 <div className="card_page">
                     <p> <b>Quản lý tài khoản game ({accList ? accList.length : 0})</b> 
                         <button type="button" className="card_menu_button drop_shadow" onClick={addAccount}> Thêm </button>
-                        <button type="button" className="card_menu_button refresh_button drop_shadow" onClick={loadCard}> Tải Mới  </button>
+                        <button type="button" className="card_menu_button refresh_button drop_shadow" onClick={loadAccount}> Tải Mới  </button>
                     </p>
                     <div className="card_container">
                         {

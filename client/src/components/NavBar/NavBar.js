@@ -6,6 +6,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import CreditPage from '../CreditPage/CreditPage';
 import Notification from './Notification/Notification';
+import GoogleMap from './GoogleMap/GoogleMap';
 import {logout, setNotification} from '../../actions/user_actions';
 import './NavBar.css';
 
@@ -20,7 +21,7 @@ const NavBar = ({userMode, userName, balance}) => {
     return(
         <header>
             <div className="content-wrapper">
-                <h1>Gaming Account Shop</h1>
+                <h1>Gaming Account Shop {userMode === "admin" ? "Management" : null}</h1>
                 <nav>
                     {
                         userMode === "admin" || userMode === "user" 
@@ -87,6 +88,7 @@ const NavBar = ({userMode, userName, balance}) => {
                 { isRegisterPageOpen ? (<RegisterPage close={() => modal.current.close()}/>) : null}
             </Modal>
             {currentNotif ? <Notification message={currentNotif}/> : null}
+            <GoogleMap/>
         </header>
     );
 }

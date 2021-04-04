@@ -1,0 +1,23 @@
+.map_container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    bottom: -115vh;
+    right: 2vh;
+    opacity: 0.4;
+    height: 250px;
+    border-radius: 5px;
+    width: 250px;
+    background-color: rgba(247, 239, 230, 0.486);
+    transition: all 0.5s ease-out;
+}
+.map_container:hover {
+    transform: translateY(-25vh);
+    opacity: 1;
+}
+.map_container h2 {
+    text-align: center;
+}
+

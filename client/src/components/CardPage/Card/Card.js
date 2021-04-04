@@ -16,17 +16,17 @@ import utaha from '../../../assets/imgs/utaha_01.jpg';
 const Card = ({account, category, card, type, mode}) => {
     const dispatch = useDispatch();
     const [isEdit, setIsEdit] = useState(false);
-    const isLogin = useSelector((state) => state.user_reducer.login);
+    const currentLoginUser = useSelector((state) => state.user_reducer.login);
 
     const onCardSelect = () => {
       if (type === "category") {
         dispatch(filterAccount(category.name));
       }
       if (type === "acc") {
-        if (isLogin === null || isLogin === undefined) {
+        if (currentLoginUser === null || currentLoginUser === undefined) {
           dispatch(setNotification("Vui lòng đăng nhập!"));
         } else {
-          dispatch(buyAccount(account));
+          dispatch(buyAccount(currentLoginUser.userName, account));
         } 
       }
     }

@@ -16,7 +16,7 @@
 }
 
 .notification_container h2 {
-    color: white;
+    color: rgb(10, 10, 10);
 }
 @keyframes popup {
     0% {

@@ -14,7 +14,7 @@ const Notification = ({message}) => {
     },[message]);
 
     return(
-        <div className="notification_container drop_shadow neon_effect">
+        <div className="notification_container drop_shadow">
             <h2> {message} </h2>
         </div>
     );

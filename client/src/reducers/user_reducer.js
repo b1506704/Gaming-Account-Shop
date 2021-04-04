@@ -1,7 +1,6 @@
 import {
   LOGIN_USER,
   REGISTER_USER,
-  GET_USER,
   ADD_CREDIT,
   FETCH_ACCOUNT,
   DELETE_ACCOUNT,
@@ -24,8 +23,6 @@ export default (state = {}, action) => {
         return { ...state, register: action.payload }
     case LOGIN_USER:
         return { ...state, login: action.payload }
-    case GET_USER:
-        return { ...state, user: action.payload }
     case LOGOUT_USER:
         return { ...state, login: action.payload}  
     case FETCH_ACCOUNT:
@@ -40,7 +37,7 @@ export default (state = {}, action) => {
                 accountList:[...state.accountList, action.payload]
             }
     case BUY_ACCOUNT:
-        return { ...state, account: action.payload }
+        return { ...state, credit: action.payload }
     case FETCH_CARD:
         return { ...state, cardList: action.payload}
     case DELETE_CARD:

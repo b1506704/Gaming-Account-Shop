@@ -1,15 +1,9 @@
 import mongoose from 'mongoose';
-import Schema from 'mongoose';
 const accountSchema = mongoose.Schema({
     id: {
-        type: String
-        // unique: true
+        type: String,
+        unique: true
     },
-    // category: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'Category',
-    // },
-    //test property
     category: String,
     imgUrl: String,
     price: {
@@ -20,11 +14,6 @@ const accountSchema = mongoose.Schema({
         type:Boolean,
         default: false,
     },
-    // accOwner: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'User',
-    //     undefined: true
-    // },
     accOwner: String,
     attr1: String,
     attr2: String,
