@@ -32,12 +32,13 @@ export default (state = {}, action) => {
         return { ...state, accountList: action.payload }
     case DELETE_ACCOUNT:
         return {...state, 
-            accountList: state.accountList.filter((account) => account.id != action.payload )
-        }
+                accountList: state.accountList.filter((account) => account.id != action.payload )
+            }
     case CREATE_ACCOUNT:
-        return {...state, 
-                    accountList:[...state.accountList, action.payload]
-                }
+        return {
+            ...state, 
+                accountList:[...state.accountList, action.payload]
+            }
     case BUY_ACCOUNT:
         return { ...state, account: action.payload }
     case FETCH_CARD:

@@ -44,7 +44,7 @@ export const register = (userInfo) => async (dispatch) => {
   try {
     const { data } = await api.createUser(userInfo);
     await dispatch({ type: REGISTER_USER, payload: data});
-    await dispatch(setNotification("Đăng ký thành công"));
+    await dispatch(setNotification(`Đăng ký thành công với username: ${data.userName}`));
   } catch (error) {
     dispatch(setNotification("Đăng ký thất bại"));
   }

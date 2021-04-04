@@ -16,6 +16,7 @@ const NavBar = ({userMode, userName, balance}) => {
     const [isCreditPageOpen, setIsCreditPageOpen] = useState(false);
     const [isRegisterPageOpen, setIsRegisterPageOpen] = useState(false);
     const currentUserInfo = useSelector ((state) => state.user_reducer.login);
+    const currentNotif = useSelector((state) => state.user_reducer.notif);
     return(
         <header>
             <div className="content-wrapper">
@@ -85,7 +86,7 @@ const NavBar = ({userMode, userName, balance}) => {
                 { isCreditPageOpen ? (<CreditPage close={() => modal.current.close()}/>) : null}
                 { isRegisterPageOpen ? (<RegisterPage close={() => modal.current.close()}/>) : null}
             </Modal>
-            <Notification/>
+            {currentNotif ? <Notification message={currentNotif}/> : null}
         </header>
     );
 }

@@ -4,21 +4,43 @@
     align-items: center;
     justify-content: center;
     bottom: -50vh;
-    /* left: -30vh; */
-    left: -1vh;
+    left: -40vh;
     height: 80px;
     border-radius: 5px;
     min-width: 250px;
-    /* opacity: 0.1; */
     opacity: 1;
     background-color: rgba(247, 239, 230, 0.486);
-    transition: all 0.6s ease-in-out;
+    animation-name: popup ;
+    animation-duration: 1.5s;
+    animation-timing-function: linear;
 }
-.notification_container:hover {
-    opacity: 1;
-    /* transform: translateX(29vh); */
-    background-color: rgba(247, 239, 230, 0.507);
-}
+
 .notification_container h2 {
     color: white;
+}
+@keyframes popup {
+    0% {
+        opacity: 1;
+        transform: translateX(0vh);
+    }
+    25% {
+        opacity: 1;
+        transform: translateX(35vh);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(40vh);
+    }
+    75% {
+        opacity: 1;
+        transform: translateX(40vh);
+    }
+    85% {
+        opacity: 0.8;
+        transform: translateX(40vh);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(40vh);
+    }
 }

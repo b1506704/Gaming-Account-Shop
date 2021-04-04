@@ -1,13 +1,21 @@
-import React from 'react';
-import {useSelector} from 'react-redux';
+import React, {useEffect} from 'react';
+import {useDispatch} from 'react-redux';
+import { setNotification } from '../../../actions/user_actions';
 
 import './Notification.css';
 
-const Notification = () => {
-    const currentNotif = useSelector((state) => state.user_reducer.notif);
+const Notification = ({message}) => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        setTimeout(() => {
+            dispatch(setNotification(null));
+        }, 1500);
+    },[message]);
+
     return(
         <div className="notification_container drop_shadow neon_effect">
-            <h2> {currentNotif} </h2>
+            <h2> {message} </h2>
         </div>
     );
 }

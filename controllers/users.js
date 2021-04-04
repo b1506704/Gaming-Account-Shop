@@ -68,9 +68,14 @@ export const addCredit = async (req, res) => {
     const { id, carrier, value } = req.body;
     try {
         const user = await User.findOne({userName: userName});
-        const card = await Card.findOneAndUpdate({id: id, carrier: carrier, value: value},{isBought: true}, {new: true});
-        const updatedUser = await User.findOneAndUpdate({userName: userName},{balance: user.balance + card.value}, {new: true});
-        res.status(200).json(updatedUser.balance);
+        const card = await Card.findOne({id, carrier, value});
+        if (card.isBought === false) {
+            const updatedCard = await Card.findOneAndUpdate({id: id, carrier: carrier, value: value},{isBought: true}, {new: true});
+            const updatedUser = await User.findOneAndUpdate({userName: userName},{balance: user.balance + updatedCard.value}, {new: true});
+            res.status(200).json(updatedUser.balance);
+        } else {
+            res.status(404).json("Xảy ra lỗi!");
+        }
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
