@@ -1,4 +1,4 @@
-import {React} from 'react';
+import {React, useRef} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Card from './Card/Card';
@@ -6,6 +6,7 @@ import LoadingContainer from '../../utils/LoadingContainer/LoadingContainer';
 import {createAccount, createCard, createCategory, fetchCategory, fetchCard, fetchAccount, setNotification} from '../../actions/user_actions';
 import getRndInteger from '../../utils/RandomGenerator';
 import './CardPage.css';
+import e from 'cors';
 
 const CardPage = ({context}) => {
     const dispatch = useDispatch();
@@ -13,6 +14,8 @@ const CardPage = ({context}) => {
     const cardList = useSelector((state) => state.user_reducer.cardList);
     const categoryList = useSelector((state) => state.user_reducer.categoryList);
     const url = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLAAAABMCAYAAAB9Pk6+AAACJUlEQVR42u3YQQEAMAgAIU2+6K7GPSAGe3NvAAAAACBqBRYAAAAAZQILAAAAgDSBBQAAAECawAIAAAAgTWABAAAAkCawAAAAAEgTWAAAAACkCSwAAAAA0gQWAAAAAGkCCwAAAIA0gQUAAABAmsACAAAAIE1gAQAAAJAmsAAAAABIE1gAAAAApAksAAAAANIEFgAAAABpAgsAAACANIEFAAAAQJrAAgAAACBNYAEAAACQJrAAAAAASBNYAAAAAKQJLAAAAADSBBYAAAAAaQILAAAAgDSBBQAAAECawAIAAAAgTWABAAAAkCawAAAAAEgTWAAAAACkCSwAAAAA0gQWAAAAAGkCCwAAAIA0gQUAAABAmsACAAAAIE1gAQAAAJAmsAAAAABIE1gAAAAApAksAAAAANIEFgAAAABpAgsAAACANIEFAAAAQJrAAgAAACBNYAEAAACQJrAAAAAASBNYAAAAAKQJLAAAAADSBBYAAAAAaQILAAAAgDSBBQAAAECawAIAAAAgTWABAAAAkCawAAAAAEgTWAAAAACkCSwAAAAA0gQWAAAAAGkCCwAAAIA0gQUAAABAmsACAAAAIE1gAQAAAJAmsAAAAABIE1gAAAAApAksAAAAANIEFgAAAABpAgsAAACANIEFAAAAQJrAAgAAACBNYAEAAACQJrAAAAAASBNYAAAAAKQJLAAAAADSBBYAAAAAaQILAAAAgDSBBQAAAEDaBznpvWmqACQLAAAAAElFTkSuQmCC";
+    const searchInput = useRef(null);
+
     const addAccount = () => {
         dispatch(
             createAccount(
@@ -52,14 +55,23 @@ const CardPage = ({context}) => {
         dispatch(fetchAccount())
         .then(() => dispatch(setNotification("Tải lại thành công")));
     }
+
+    const sortAccount = () => {
+        const rank = searchInput.current.value;
+        dispatch(setNotification(`Lọc theo Rank ${rank}`));
+    }
     
     switch (context) {
         case "list":
             return(
                 <div className="card_page">
-                    <p> <b>Tài khoản game ({accList ? accList.length : 0})</b> 
+                    <div className="card_header"> <b>Tài khoản game ({accList ? accList.length : 0})</b> 
                         <button type="button" className="card_menu_button refresh_button_user drop_shadow" onClick={loadAccount}> Tải Mới  </button>
-                    </p>
+                        <form>
+                            <input type="text" ref={searchInput} className="drop_shadow" placeholder="Tìm theo Rank"></input>
+                            <input type="button" className="drop_shadow" onClick={sortAccount}></input>
+                        </form>
+                    </div>
                     <div className="card_container">
                         {
                             accList != null && accList.length != 0? 
@@ -73,9 +85,9 @@ const CardPage = ({context}) => {
         case "category":
             return(
                 <div className="card_page">
-                    <p> <b>Danh mục game ({categoryList ? categoryList.length : 0})</b> 
+                    <div className="card_header"> <b>Danh mục game ({categoryList ? categoryList.length : 0})</b> 
                         <button type="button" className="card_menu_button refresh_button_user drop_shadow" onClick={loadCategory}> Tải Mới  </button>
-                    </p>
+                    </div>
 
                     <div className="card_container">
                         {
@@ -90,10 +102,10 @@ const CardPage = ({context}) => {
         case "edit_category":
             return(
                 <div className="card_page">
-                    <p> <b>Quản lý danh mục game ({categoryList ? categoryList.length : 0})</b> 
+                    <div className="card_header"> <b>Quản lý danh mục game ({categoryList ? categoryList.length : 0})</b> 
                         <button type="button" className="card_menu_button drop_shadow" onClick={addCategory}> Thêm </button>
                         <button type="button" className="card_menu_button refresh_button drop_shadow" onClick={loadCategory}> Tải Mới  </button>
-                    </p>
+                    </div>
                     <div className="card_container">
                         {
                             categoryList != null && categoryList.length != 0 ? 
@@ -107,10 +119,10 @@ const CardPage = ({context}) => {
         case "edit_list":
             return(
                 <div className="card_page">
-                    <p> <b>Quản lý tài khoản game ({accList ? accList.length : 0})</b> 
+                    <div className="card_header"> <b>Quản lý tài khoản game ({accList ? accList.length : 0})</b> 
                         <button type="button" className="card_menu_button drop_shadow" onClick={addAccount}> Thêm </button>
                         <button type="button" className="card_menu_button refresh_button drop_shadow" onClick={loadAccount}> Tải Mới  </button>
-                    </p>
+                    </div>
                     <div className="card_container">
                         {
                             accList != null && accList.length != 0?
@@ -124,10 +136,10 @@ const CardPage = ({context}) => {
         case "edit_card":
             return(
                 <div className="card_page">
-                    <p> <b>Quản lý thẻ nạp ({cardList ? cardList.length : 0})</b> 
+                    <div className="card_header"> <b>Quản lý thẻ nạp ({cardList ? cardList.length : 0})</b> 
                         <button type="button" className="card_menu_button drop_shadow" onClick={addCard}> Thêm </button>
                         <button type="button" className="card_menu_button refresh_button drop_shadow" onClick={loadCard}> Tải Mới  </button>
-                    </p>
+                    </div>
                     <div className="card_container">
                         {
                             cardList != null && cardList.length != 0 ?

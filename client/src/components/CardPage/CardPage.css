@@ -7,7 +7,7 @@
 	margin-top: 25px;
 }
 
-.card_page p {
+.card_page .card_header {
 	display: flex;
 	align-items: center;
 	justify-content: center; 
@@ -43,6 +43,38 @@
 }
 .refresh_button_user {
 	right: 2vh !important;
+}
+
+.card_page form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	left: 4vh;
+}
+.card_page form input[type=text] {
+	position: relative;
+	padding-left: 2vh;
+	height: 50px;
+    width: 200px;
+	background-color: rgba(248, 245, 240, 0.555);
+	margin: 0;
+    font-size: 20px;
+    border-radius: 5px;
+    color: rgb(22, 21, 21);
+}
+.card_page form input[type=button] {
+	position: relative;
+	height: 50px;
+    width: 50px;
+	margin-left: 2vh;
+	border-style:none;
+	background: url("../../assets/imgs/zoom.png") no-repeat top left;
+	background-size: contain;
+	transition: all 0.2s ease-out;
+}
+.card_page form input[type=button]:hover {
+	transform: scale(1.05);
 }
 .card_page .card_menu_button:hover {
 	transform: scaleX(1.05);
