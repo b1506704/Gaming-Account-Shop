@@ -9,6 +9,8 @@
     border-radius: 5px;
     min-width: 250px;
     opacity: 1;
+    padding-left: 25px;
+    padding-right: 25px;
     background-color: rgba(247, 239, 230, 0.486);
     animation-name: popup ;
     animation-duration: 1.5s;

@@ -11,6 +11,7 @@ import {
   CREATE_CARD,
   FETCH_CARD,
   DELETE_CARD,
+  UPDATE_CARD,
   CREATE_CATEGORY,
   FETCH_CATEGORY,
   DELETE_CATEGORY,
@@ -48,6 +49,8 @@ export default (state = {}, action) => {
         return { ...state, deleteCard: action.payload }
     case CREATE_CARD:
         return { ...state, createdCard: action.payload }        
+    case UPDATE_CARD:
+        return { ...state, updatedCard: action.payload}            
     case FETCH_CATEGORY:
         return { ...state, categoryList: action.payload}
     case DELETE_CATEGORY:

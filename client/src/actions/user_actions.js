@@ -12,6 +12,7 @@ import {
   FETCH_CARD,
   DELETE_CARD,
   CREATE_CARD,
+  UPDATE_CARD,
   FETCH_CATEGORY,
   DELETE_CATEGORY,
   CREATE_CATEGORY,
@@ -141,6 +142,16 @@ export const createCard = (cardInfo) => async (dispatch) => {
     await dispatch(setNotification("Thêm hoàn tất"));
   } catch (error) {
     dispatch(setNotification("Thêm thất bại"));
+  }
+};
+export const updateCard = (id, cardInfo) => async (dispatch) => {
+  try {
+    const { data } = await api.updateCard(id, cardInfo);
+    await dispatch({ type: UPDATE_CARD, payload: data});
+    await dispatch(fetchCard());
+    await dispatch(setNotification("Cập nhật hoàn tất"));
+  } catch (error) {
+    dispatch(setNotification("Cập nhật thất bại"));
   }
 };
 //category action

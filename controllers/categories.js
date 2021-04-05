@@ -54,7 +54,7 @@ export const updateCategory = async (req, res) => {
         const category = await Category.findOne({name: req.params.name});
         const updatedCategory = await Category.findOneAndUpdate(
             {name: category.name},
-            {name: name, imgUrl} , 
+            {name: name, imgUrl: imgUrl} , 
             {new: true}
         );
         res.status(200).json(updatedCategory);

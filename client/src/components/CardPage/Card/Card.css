@@ -34,6 +34,18 @@
   width: 100%;
   z-index: 2;
 }
+.card_detail input, .card_detail select {
+  background-color:rgba(237, 243, 248, 0.801);
+  position: absolute;
+  color: black;
+  height: 20px;
+  width: 80px;
+  right: 2vh;
+  font-weight: bold;
+  text-align: center;
+  margin-left: 2vh;
+  border-radius: 5px;
+}
 .card_detail .card_button {
   position: absolute;
   opacity: 0.3;
@@ -52,11 +64,22 @@
 }
 
 .edit_button {
-  bottom: 25vh !important;
+  bottom: 23vh !important;
 }
-
+.base64_button {
+  display: flex !important;
+  align-items: center !important;
+  text-align: left !important;
+  font-size: 15px;
+  padding-left: 15px;
+  justify-content: flex-start !important;
+  bottom: 38vh !important;
+}
 .delete_button {
-  bottom: 32vh !important;
+  bottom: 55vh !important;
+}
+.cancel_button {
+  bottom: 30vh !important;
 }
 
 .card_detail .card_button:hover {

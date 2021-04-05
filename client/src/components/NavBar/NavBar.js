@@ -9,6 +9,7 @@ import Notification from './Notification/Notification';
 import GoogleMap from './GoogleMap/GoogleMap';
 import {logout, setNotification} from '../../actions/user_actions';
 import './NavBar.css';
+import LoadingContainer from '../../utils/LoadingContainer/LoadingContainer';
 
 const NavBar = ({userMode, userName, balance}) => {
     const dispatch = useDispatch();

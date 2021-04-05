@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import Schema from 'mongoose';
 const accountSchema = mongoose.Schema({
     id: {
         type: String,

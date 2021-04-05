@@ -6,7 +6,6 @@ import LoadingContainer from '../../utils/LoadingContainer/LoadingContainer';
 import {createAccount, createCard, createCategory, fetchCategory, fetchCard, fetchAccount, setNotification} from '../../actions/user_actions';
 import getRndInteger from '../../utils/RandomGenerator';
 import './CardPage.css';
-import e from 'cors';
 
 const CardPage = ({context}) => {
     const dispatch = useDispatch();
@@ -14,6 +13,8 @@ const CardPage = ({context}) => {
     const cardList = useSelector((state) => state.user_reducer.cardList);
     const categoryList = useSelector((state) => state.user_reducer.categoryList);
     const url = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLAAAABMCAYAAAB9Pk6+AAACJUlEQVR42u3YQQEAMAgAIU2+6K7GPSAGe3NvAAAAACBqBRYAAAAAZQILAAAAgDSBBQAAAECawAIAAAAgTWABAAAAkCawAAAAAEgTWAAAAACkCSwAAAAA0gQWAAAAAGkCCwAAAIA0gQUAAABAmsACAAAAIE1gAQAAAJAmsAAAAABIE1gAAAAApAksAAAAANIEFgAAAABpAgsAAACANIEFAAAAQJrAAgAAACBNYAEAAACQJrAAAAAASBNYAAAAAKQJLAAAAADSBBYAAAAAaQILAAAAgDSBBQAAAECawAIAAAAgTWABAAAAkCawAAAAAEgTWAAAAACkCSwAAAAA0gQWAAAAAGkCCwAAAIA0gQUAAABAmsACAAAAIE1gAQAAAJAmsAAAAABIE1gAAAAApAksAAAAANIEFgAAAABpAgsAAACANIEFAAAAQJrAAgAAACBNYAEAAACQJrAAAAAASBNYAAAAAKQJLAAAAADSBBYAAAAAaQILAAAAgDSBBQAAAECawAIAAAAgTWABAAAAkCawAAAAAEgTWAAAAACkCSwAAAAA0gQWAAAAAGkCCwAAAIA0gQUAAABAmsACAAAAIE1gAQAAAJAmsAAAAABIE1gAAAAApAksAAAAANIEFgAAAABpAgsAAACANIEFAAAAQJrAAgAAACBNYAEAAACQJrAAAAAASBNYAAAAAKQJLAAAAADSBBYAAAAAaQILAAAAgDSBBQAAAEDaBznpvWmqACQLAAAAAElFTkSuQmCC";
+    const carrier = ['Viettel', 'Mobifone', 'Vinaphone'];   
+    const cardValue = [20000, 50000, 100000, 200000, 500000, 1000000];   
     const searchInput = useRef(null);
 
     const addAccount = () => {
@@ -23,22 +24,34 @@ const CardPage = ({context}) => {
                     id: getRndInteger(1,2000),  
                     price: getRndInteger(50000,2500000),
                     category: categoryList !=null && categoryList.length!= 0 ? categoryList[getRndInteger(0,  categoryList.length - 1)].name : null,
-                    imgUrl: url,
+                    imgUrl: null,
                     isBought: false, 
                     accOwner: '',
-                    attr1: getRndInteger(1,100),
+                    attr1: 'Rỗng',
                     attr2: getRndInteger(1,7),
-                    attr3: getRndInteger(1,100),
-                    attr4: getRndInteger(1,100)
+                    attr3: 'Rỗng',
+                    attr4: 'Rỗng'
                 }
             )
         );
     }
     const addCard = () => {
-        dispatch(createCard({id: getRndInteger(1,2000),  carrier: 'Viettel' || 'Mobifone' || 'Vinaphone', value: 50000 || 100000 || 1000000 }));
+        dispatch(createCard(
+            {
+                id: getRndInteger(1,2000),
+                carrier: carrier[getRndInteger(0, carrier.length-1)],
+                value: cardValue[getRndInteger(0, cardValue.length-1)]
+            }
+        ));
     }
     const addCategory = () => {
-        dispatch(createCategory({name: getRndInteger(1,100), imgUrl: url, accNum: 0, sellNum: 0}));
+        dispatch(createCategory(
+            {
+                name: getRndInteger(1,2000),
+                imgUrl: url,
+                accNum: 0,
+                sellNum: 0
+            }));
     }
 
     const loadCategory = () => {
@@ -56,9 +69,13 @@ const CardPage = ({context}) => {
         .then(() => dispatch(setNotification("Tải lại thành công")));
     }
 
-    const sortAccount = () => {
+    const sortAccountByRank = () => {
         const rank = searchInput.current.value;
-        dispatch(setNotification(`Lọc theo Rank ${rank}`));
+        if (rank.trim() === '') {
+            dispatch(setNotification(`Vui lòng nhập Rank`));
+        } else {
+            dispatch(setNotification(`Lọc theo Rank ${rank}`));
+        }
     }
     
     switch (context) {
@@ -69,7 +86,7 @@ const CardPage = ({context}) => {
                         <button type="button" className="card_menu_button refresh_button_user drop_shadow" onClick={loadAccount}> Tải Mới  </button>
                         <form>
                             <input type="text" ref={searchInput} className="drop_shadow" placeholder="Tìm theo Rank"></input>
-                            <input type="button" className="drop_shadow" onClick={sortAccount}></input>
+                            <input type="button" className="drop_shadow" onClick={sortAccountByRank}></input>
                         </form>
                     </div>
                     <div className="card_container">

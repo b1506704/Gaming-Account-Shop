@@ -10,6 +10,7 @@ export const FILTER_ACCOUNT = 'filter_account';
 export const LOGOUT_USER = 'logout_user';
 export const CREATE_CARD = 'create_card';
 export const DELETE_CARD = 'delete_card';
+export const UPDATE_CARD = 'update_card';
 export const FETCH_CARD = 'fetch_card';
 export const CREATE_CATEGORY = 'create_category';
 export const DELETE_CATEGORY = 'delete_category';

@@ -33,6 +33,20 @@ export const createCard = async (req, res) => {
         res.status(409).json({ message: error.message });
     }
 }
+export const updateCard = async (req, res) => { 
+    const { carrier, value } = req.body;
+    try {
+        const card = await Card.findOne({id: req.params.id});
+        const updatedCard = await Card.findOneAndUpdate(
+            {id: card.id},
+            {carrier: carrier, value: value} , 
+            {new: true}
+        );
+        res.status(200).json(updatedCard);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
 export const getCard = async (req, res) => { 
     const { id } = req.body;
 

@@ -57,11 +57,18 @@
 	padding-left: 2vh;
 	height: 50px;
     width: 200px;
-	background-color: rgba(248, 245, 240, 0.555);
+	background-color: rgba(248, 245, 240, 0);
 	margin: 0;
     font-size: 20px;
-    border-radius: 5px;
+	border-style: none;
+    /* border-radius: 5px; */
     color: rgb(22, 21, 21);
+	transition: all 0.4s ease-in-out;
+}
+.card_page form input[type=text]:focus {
+	background-color: rgb(248, 245, 240);
+	border-top: rgb(11, 14, 8) 5px solid;
+	border-bottom: rgb(11, 14, 8) 5px solid;
 }
 .card_page form input[type=button] {
 	position: relative;
@@ -69,12 +76,12 @@
     width: 50px;
 	margin-left: 2vh;
 	border-style:none;
-	background: url("../../assets/imgs/zoom.png") no-repeat top left;
+	background: url("../../assets/imgs/zoom.svg") no-repeat top left;
 	background-size: contain;
 	transition: all 0.2s ease-out;
 }
 .card_page form input[type=button]:hover {
-	transform: scale(1.05);
+	transform: scale(1.15);
 }
 .card_page .card_menu_button:hover {
 	transform: scaleX(1.05);
