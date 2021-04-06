@@ -18,6 +18,16 @@ export const getUsers = async (req, res) => {
     }
 }
 
+export const getUser = async (req, res) => {
+    const { userName } = req.params;
+    try {
+        const user = await User.findOne({userName: userName});
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(404).json(error.message);
+    }
+}
+
 export const login = async (req, res) => { 
     const { userName, passWord } = req.body;
 
@@ -75,16 +85,44 @@ export const addCredit = async (req, res) => {
 export const buyAccount = async (req, res) => { 
     const { userName } = req.params;
     const { id } = req.body;
+    //todo: INCREASE ACC SELLER BALANCE
     try {
         const user = await User.findOne({userName: userName});
         const account = await Account.findOne({id});
         if (account.isBought === false && isValidPurchase(user.balance,account.price)) {
             const updatedAccount = await Account.findOneAndUpdate({id: id},{isBought: true, accOwner: userName}, {new: true});
-            const updatedUser = await User.findOneAndUpdate({userName: userName},{balance: user.balance - updatedAccount.price}, {new: true});
+            const updatedUser = await User.findOneAndUpdate(
+                {userName: userName},
+                {
+                    balance: user.balance - updatedAccount.price,
+                    $push: {accountOwnList: updatedAccount.id},
+                },
+                {new: true});
             res.status(200).json(updatedUser.balance);
         } else {
             res.status(404).json("Xảy ra lỗi!");
         }
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
+export const sellAccount = async (req, res) => { 
+    const { userName } = req.params;
+    const { id } = req.body;
+    try {
+        const user = await User.findOne({userName: userName});
+        const account = await Account.findOne({id});
+        const updatedAccount = await Account.findOneAndUpdate({id: id},{accSeller: userName}, {new: true});
+        const updatedUser = await User.findOneAndUpdate(
+            {userName: userName},
+            {
+                balance: user.balance - updatedAccount.price,
+                $push: {accountSellList: updatedAccount.id},
+            },
+            {new: true}
+        );
+        res.status(200).json(updatedUser);
     } catch (error) {
         res.status(404).json({ message: error.message });
     }

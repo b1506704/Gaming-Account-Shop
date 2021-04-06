@@ -1,7 +1,7 @@
 import { React, useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {addCredit, setNotification} from '../../actions/user_actions';
+import {addCredit, getUser, setNotification} from '../../actions/user_actions';
 import './CreditPage.css';
 
 const CreditPage = ({close}) => {
@@ -41,7 +41,9 @@ const CreditPage = ({close}) => {
 
     useEffect(() => {
         if (creditInfo.id != '') {
-            dispatch(addCredit(currentUserName, creditInfo));
+            dispatch(addCredit(currentUserName, creditInfo))
+            .then(() => dispatch(getUser(currentUserName)));
+            
         }
     },[creditInfo]);
 

@@ -1,11 +1,13 @@
 import {
   LOGIN_USER,
+  GET_USER,
   REGISTER_USER,
   ADD_CREDIT,
   FETCH_ACCOUNT,
   DELETE_ACCOUNT,
   BUY_ACCOUNT,
   FILTER_ACCOUNT,
+  FILTER_ACCOUNT_BY_RANK,
   CREATE_ACCOUNT,
   UPDATE_ACCOUNT,
   LOGOUT_USER,
@@ -29,6 +31,16 @@ export const login = (userInfo) => async (dispatch) => {
     await dispatch(setNotification("Đăng nhập thành công"));
   } catch (error) {
     dispatch(setNotification("Đăng nhập thất bại"));
+  }
+};
+
+export const getUser = (userName) => async (dispatch) => {
+  try {
+    const { data } = await api.getUser(userName);
+    dispatch({ type: GET_USER, payload: data});
+  } catch (error) {
+    console.log(error.message);
+    // dispatch(setNotification("Đăng nhập thất bại"));
   }
 };
 
@@ -62,10 +74,31 @@ export const addCredit = (userName, creditInfo) => async (dispatch) => {
   }
 };
 
+export const filterAccount = (categoryName) => async (dispatch) => {
+  try {
+    await dispatch(fetchAccount());
+    await dispatch({ type: FILTER_ACCOUNT, payload: categoryName});
+    await dispatch(setNotification(`Lọc theo ${categoryName} `));
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const filterAccountByRank = (rank) => async (dispatch) => {
+  try {
+    await dispatch(fetchAccount());
+    await dispatch({ type: FILTER_ACCOUNT_BY_RANK, payload: rank});
+    await dispatch(setNotification(`Lọc theo rank ${rank} `));
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 export const buyAccount = (userName, accInfo) => async (dispatch) => {
   try {
     const { data } = await api.buyAccount(userName, accInfo);
     await dispatch({ type: BUY_ACCOUNT, payload: data});
+    await dispatch(fetchAccount());
     await dispatch(setNotification("Mua thành công"));
   } catch (error) {
     dispatch(setNotification("Mua thất bại"));
@@ -197,14 +230,7 @@ export const updateCategory = (name, categoryInfo) => async (dispatch) => {
   }
 };
 
-export const filterAccount = (categoryName) => async (dispatch) => {
-  try {
-    await dispatch({ type: FILTER_ACCOUNT, payload: categoryName});
-    await dispatch(setNotification(`Lọc theo ${categoryName} `));
-  } catch (error) {
-    console.log(error.message);
-  }
-};
+
 
 export const setNotification = (notification) => async (dispatch) => {
   try {

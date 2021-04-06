@@ -1,6 +1,7 @@
 import {
   LOGIN_USER,
   REGISTER_USER,
+  GET_USER,
   ADD_CREDIT,
   FETCH_ACCOUNT,
   DELETE_ACCOUNT,
@@ -17,7 +18,8 @@ import {
   DELETE_CATEGORY,
   UPDATE_CATEGORY,
   SET_NOTIFICATION,
-  UPDATE_ACCOUNT
+  UPDATE_ACCOUNT,
+  FILTER_ACCOUNT_BY_RANK
 } from '../constants/actionTypes';
 
 export default (state = {}, action) => {
@@ -26,6 +28,8 @@ export default (state = {}, action) => {
         return { ...state, register: action.payload }
     case LOGIN_USER:
         return { ...state, login: action.payload }
+    case GET_USER:
+        return { ...state, currentUser: action.payload }        
     case LOGOUT_USER:
         return { ...state, login: action.payload}  
     case FETCH_ACCOUNT:
@@ -62,7 +66,15 @@ export default (state = {}, action) => {
     case ADD_CREDIT:
         return { ...state, credit: action.payload}
     case FILTER_ACCOUNT:
-        return { ...state, filterCategory: action.payload}
+        return { 
+            ...state, 
+                accountList: state.accountList.filter((account) => account.category === action.payload)
+        }
+    case FILTER_ACCOUNT_BY_RANK:
+        return { 
+            ...state, 
+                accountList: state.accountList.filter((account) => account.attr2 === action.payload)
+        }
     case SET_NOTIFICATION:
         return { ...state, notif: action.payload}
     default:

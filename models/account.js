@@ -15,6 +15,7 @@ const accountSchema = mongoose.Schema({
         default: false,
     },
     accOwner: String,
+    accSeller: String,
     attr1: String,
     attr2: String,
     attr3: String,

@@ -5,6 +5,7 @@ const userSchema = mongoose.Schema({
         type: String,
         require: true,
         unique: true,
+        maxlength: 8
     },
     passWord: {
         type: String,
@@ -21,6 +22,8 @@ const userSchema = mongoose.Schema({
         default: 0,
         unique: true
     },
+    accountOwnList: Array,
+    accountSellList: Array,
     isLogin: {
         type: Boolean,
         default: false

@@ -11,9 +11,9 @@ import {
   setNotification,
   updateAccount,
   updateCategory,
-  updateCard
+  updateCard,
+  getUser
 } from '../../../actions/user_actions';
-import getRndInteger from '../../../utils/RandomGenerator';
 import './Card.css';
 import viettel from '../../../assets/imgs/viettel.png'; 
 import mobifone from '../../../assets/imgs/mobi.png'
@@ -55,15 +55,34 @@ const Card = ({account, category, card, type, mode}) => {
     const [currentBase64, setCurrentBase64] = useState(null);
     const currentLoginUser = useSelector((state) => state.user_reducer.login);
     const currentCategory = useSelector((state) => state.user_reducer.categoryList);
+    const currentAccount = useSelector((state) => state.user_reducer.accountList);
+    const carrierList = ['Viettel', 'Mobifone', 'Vinaphone'];   
+    const cardValueList = [20000, 50000, 100000, 200000, 500000, 1000000];   
+    
+    const countCtgByName = (name) => {
+      if (currentAccount) {
+        let count = 0;
+        for (let i = 0; i < currentAccount.length; i++) {
+          if (currentAccount[i].category === name) {
+            count++;
+          }
+        }
+        return count;
+      }
+    }
 
-    const carrier = ['Viettel', 'Mobifone', 'Vinaphone'];   
-    const cardValue = [20000, 50000, 100000, 200000, 500000, 1000000];   
-    
-    const sampleCard = {
-      carrier: carrier[getRndInteger(0, carrier.length-1)],
-      value: cardValue[getRndInteger(0,cardValue.length-1)],
-    };
-    
+    const countCtgBySell = (name) => {
+      let count = 0;
+      if (currentAccount) {
+        for (let i = 0; i < currentAccount.length; i++) {
+          if (currentAccount[i].category === name && currentAccount[i].isBought === true) {
+            count++;
+          }
+        }
+        return count;
+      }
+    }
+
     const onCardSelect = () => {
       if (type === "category") {
         dispatch(filterAccount(category.name));
@@ -72,7 +91,8 @@ const Card = ({account, category, card, type, mode}) => {
         if (currentLoginUser === null || currentLoginUser === undefined) {
           dispatch(setNotification("Vui lòng đăng nhập!"));
         } else {
-          dispatch(buyAccount(currentLoginUser.userName, account));
+          dispatch(buyAccount(currentLoginUser.userName, account))
+          .then(() => dispatch(getUser(currentLoginUser.userName)));
         } 
       }
     }
@@ -100,7 +120,11 @@ const Card = ({account, category, card, type, mode}) => {
           dispatch(updateCategory(category.name, toUpdateCategory))
           .then(() => setIsEdit(false));
       } else if (type === "card") {
-          dispatch(updateCard(card.id, sampleCard))
+          const toUpdateCard = {
+            carrier: cardInputRef.carrierRef.current.value,
+            value: cardInputRef.valueRef.current.value,
+          };
+          dispatch(updateCard(card.id, toUpdateCard))
           .then(() => setIsEdit(false));
       }
     }
@@ -140,14 +164,8 @@ const Card = ({account, category, card, type, mode}) => {
                   : (<input ref={accountInputRef.priceRef} type="text" placeholder={account.price}></input>)
                 }
               </div>
-              {
-                mode === "edit"
-                ? <div> 
-                    <div>Tình trạng: &nbsp;{account.isBought ? "Đã bán" : "Chưa bán"}</div>
-                    <div>Người mua:&nbsp; {account.accOwner}</div>
-                  </div>
-                : null
-              }
+              <div style={{color: "black"}}>Tình trạng: &nbsp;{account.isBought ? "Đã bán" : "Chưa bán"}</div>
+              <div style={{color: "black"}}>Người mua:&nbsp; {account.accOwner}</div>
               <div> Tên trong game:&nbsp;
               { isEdit === false ? account.attr1
                 : (<input ref={accountInputRef.attr1Ref} type="text" placeholder={account.attr1}></input>)
@@ -173,18 +191,36 @@ const Card = ({account, category, card, type, mode}) => {
           : type === "category" 
             ? <div className="acc_info">
                 <div> Tên game:
-                { isEdit === false ? category.name
-                : (<input ref={categoryInputRef.nameRef} type="text" placeholder={category.name}></input>)
-              }
+                  { isEdit === false ? category.name
+                  : (<input ref={categoryInputRef.nameRef} type="text" placeholder={category.name}></input>)
+                  }
                 </div>
-                <div> Số tài khoản hiện có:&nbsp; {category.accNum}</div>
-                <div> Đã bán:&nbsp; {category.sellNum}</div>
+                <div style={{color: "black"}}> Số tài khoản hiện có:&nbsp; {countCtgByName(category.name) || null}</div>
+                <div style={{color: "black"}}> Đã bán:&nbsp; {countCtgBySell(category.name) || null}</div>
               </div>
               : type === "card"
                 ? <div className="acc_info">
-                    <div> Nhà mạng:&nbsp; {card.carrier}</div>
-                    <div> Giá trị: &nbsp;{card.value}</div>
-                    <div> Tình trạng:&nbsp;  {card.isBought ? "Đã bán" : "Chưa bán" }</div>
+                    <div> Nhà mạng:&nbsp;
+                        { isEdit === false ? card.carrier
+                          : (<select ref={cardInputRef.carrierRef}>
+                              { carrierList != null 
+                                ? carrierList.map((ele, key) => (<option value={ele} key={key}>{ele}</option>))
+                                : null
+                              }
+                            </select>)
+                        }
+                    </div>
+                    <div> Giá trị: &nbsp;
+                        { isEdit === false ? card.value
+                          : (<select ref={cardInputRef.valueRef}>
+                              { cardValueList != null 
+                                ? cardValueList.map((ele, key) => (<option value={ele} key={key}>{ele}</option>))
+                                : null
+                              }
+                            </select>)
+                        }
+                    </div>
+                    <div style={{color: "black"}}> Tình trạng:&nbsp;  {card.isBought ? "Đã bán" : "Chưa bán" }</div>
                   </div>
                   : null   
         }
@@ -199,10 +235,10 @@ const Card = ({account, category, card, type, mode}) => {
                     Sửa
                   </button>) 
                 : <>
-                  <div className="card_button base64_button drop_shadow">
+                  { type === "card" ? null : (<div className="card_button base64_button drop_shadow">
                     Upload hình ảnh:
                     <FileBase className="base64"  type="file" multiple={false} onDone = {({base64}) => {setCurrentBase64(base64)}}></FileBase>  
-                  </div>
+                  </div>)}
                   <button type="button" className="card_button cancel_button drop_shadow" onClick={onCardCancel}>
                     Hủy
                   </button>

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Card from './Card/Card';
 import LoadingContainer from '../../utils/LoadingContainer/LoadingContainer';
-import {createAccount, createCard, createCategory, fetchCategory, fetchCard, fetchAccount, setNotification} from '../../actions/user_actions';
+import {createAccount, createCard, createCategory, fetchCategory, fetchCard, fetchAccount, setNotification, filterAccountByRank} from '../../actions/user_actions';
 import getRndInteger from '../../utils/RandomGenerator';
 import './CardPage.css';
 
@@ -12,7 +12,6 @@ const CardPage = ({context}) => {
     const accList = useSelector((state) => state.user_reducer.accountList);
     const cardList = useSelector((state) => state.user_reducer.cardList);
     const categoryList = useSelector((state) => state.user_reducer.categoryList);
-    const url = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLAAAABMCAYAAAB9Pk6+AAACJUlEQVR42u3YQQEAMAgAIU2+6K7GPSAGe3NvAAAAACBqBRYAAAAAZQILAAAAgDSBBQAAAECawAIAAAAgTWABAAAAkCawAAAAAEgTWAAAAACkCSwAAAAA0gQWAAAAAGkCCwAAAIA0gQUAAABAmsACAAAAIE1gAQAAAJAmsAAAAABIE1gAAAAApAksAAAAANIEFgAAAABpAgsAAACANIEFAAAAQJrAAgAAACBNYAEAAACQJrAAAAAASBNYAAAAAKQJLAAAAADSBBYAAAAAaQILAAAAgDSBBQAAAECawAIAAAAgTWABAAAAkCawAAAAAEgTWAAAAACkCSwAAAAA0gQWAAAAAGkCCwAAAIA0gQUAAABAmsACAAAAIE1gAQAAAJAmsAAAAABIE1gAAAAApAksAAAAANIEFgAAAABpAgsAAACANIEFAAAAQJrAAgAAACBNYAEAAACQJrAAAAAASBNYAAAAAKQJLAAAAADSBBYAAAAAaQILAAAAgDSBBQAAAECawAIAAAAgTWABAAAAkCawAAAAAEgTWAAAAACkCSwAAAAA0gQWAAAAAGkCCwAAAIA0gQUAAABAmsACAAAAIE1gAQAAAJAmsAAAAABIE1gAAAAApAksAAAAANIEFgAAAABpAgsAAACANIEFAAAAQJrAAgAAACBNYAEAAACQJrAAAAAASBNYAAAAAKQJLAAAAADSBBYAAAAAaQILAAAAgDSBBQAAAEDaBznpvWmqACQLAAAAAElFTkSuQmCC";
     const carrier = ['Viettel', 'Mobifone', 'Vinaphone'];   
     const cardValue = [20000, 50000, 100000, 200000, 500000, 1000000];   
     const searchInput = useRef(null);
@@ -48,7 +47,7 @@ const CardPage = ({context}) => {
         dispatch(createCategory(
             {
                 name: getRndInteger(1,2000),
-                imgUrl: url,
+                imgUrl: null,
                 accNum: 0,
                 sellNum: 0
             }));
@@ -69,24 +68,25 @@ const CardPage = ({context}) => {
         .then(() => dispatch(setNotification("Tải lại thành công")));
     }
 
-    const sortAccountByRank = () => {
+    const searchByRank = (e) => {
+        e.preventDefault();
         const rank = searchInput.current.value;
         if (rank.trim() === '') {
             dispatch(setNotification(`Vui lòng nhập Rank`));
         } else {
-            dispatch(setNotification(`Lọc theo Rank ${rank}`));
+            dispatch(filterAccountByRank(rank));
         }
     }
-    
+
     switch (context) {
         case "list":
             return(
                 <div className="card_page">
                     <div className="card_header"> <b>Tài khoản game ({accList ? accList.length : 0})</b> 
                         <button type="button" className="card_menu_button refresh_button_user drop_shadow" onClick={loadAccount}> Tải Mới  </button>
-                        <form>
+                        <form onSubmit={(e) => searchByRank(e)}>
                             <input type="text" ref={searchInput} className="drop_shadow" placeholder="Tìm theo Rank"></input>
-                            <input type="button" className="drop_shadow" onClick={sortAccountByRank}></input>
+                            <input type="submit" className="drop_shadow"></input>
                         </form>
                     </div>
                     <div className="card_container">

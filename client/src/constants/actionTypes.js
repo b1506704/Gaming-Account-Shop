@@ -1,4 +1,5 @@
 export const LOGIN_USER = 'login_user';
+export const GET_USER = 'get_user';
 export const REGISTER_USER = 'register_user';
 export const ADD_CREDIT = 'add_credit';
 export const BUY_ACCOUNT = 'buy_account';
@@ -7,6 +8,7 @@ export const DELETE_ACCOUNT = 'delete_account';
 export const CREATE_ACCOUNT = 'create_account';
 export const UPDATE_ACCOUNT = 'update_account';
 export const FILTER_ACCOUNT = 'filter_account';
+export const FILTER_ACCOUNT_BY_RANK = 'filter_account_by_rank';
 export const LOGOUT_USER = 'logout_user';
 export const CREATE_CARD = 'create_card';
 export const DELETE_CARD = 'delete_card';

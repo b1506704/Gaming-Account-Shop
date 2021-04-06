@@ -11,7 +11,7 @@ const UserPage = ({user, balance}) => {
     return(
         <div>
             <NavBar userName={user.userName} userMode="user" balance= {balance}/>
-            <HeadingTitle title={`Chào mừng ${user.userName} đến với Gaming Account Shop`} subtitle={`Số điện thoại liên lạc: ${user.phoneNumber}`}/>
+            <HeadingTitle title={`Chào mừng ${user.userName} đến với Gaming Account Shop`} subtitle={''}/>
             <AccountCategory/>
             <AccountList/>
             <Footer/>

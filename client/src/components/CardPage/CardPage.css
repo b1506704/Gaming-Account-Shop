@@ -70,17 +70,18 @@
 	border-top: rgb(11, 14, 8) 5px solid;
 	border-bottom: rgb(11, 14, 8) 5px solid;
 }
-.card_page form input[type=button] {
+.card_page form input[type=submit] {
 	position: relative;
 	height: 50px;
     width: 50px;
+	color: transparent;
 	margin-left: 2vh;
 	border-style:none;
 	background: url("../../assets/imgs/zoom.svg") no-repeat top left;
 	background-size: contain;
 	transition: all 0.2s ease-out;
 }
-.card_page form input[type=button]:hover {
+.card_page form input[type=submit]:hover {
 	transform: scale(1.15);
 }
 .card_page .card_menu_button:hover {

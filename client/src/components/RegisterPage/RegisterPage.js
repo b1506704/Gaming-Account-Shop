@@ -43,7 +43,7 @@ const RegisterPage = ({close}) => {
                 }}>
                 <div>
                     <label>Tên đăng ký:</label>
-                    <input type="text" autoFocus={true} name="username"></input>
+                    <input type="text" autoFocus={true} name="username" placeholder="<=8 ký tự"></input>
                 </div>
                 <div>
                     <label>Mật khẩu </label>

@@ -7,6 +7,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import CreditPage from '../CreditPage/CreditPage';
 import Notification from './Notification/Notification';
 import GoogleMap from './GoogleMap/GoogleMap';
+import UserInfo from '../UserPage/UserInfo/UserInfo';
 import {logout, setNotification} from '../../actions/user_actions';
 import './NavBar.css';
 import LoadingContainer from '../../utils/LoadingContainer/LoadingContainer';
@@ -89,7 +90,8 @@ const NavBar = ({userMode, userName, balance}) => {
                 { isRegisterPageOpen ? (<RegisterPage close={() => modal.current.close()}/>) : null}
             </Modal>
             {currentNotif ? <Notification message={currentNotif}/> : null}
-            <GoogleMap/>
+            { userMode === "admin" ? null :<GoogleMap/>}
+            { userMode === "user" ? <UserInfo user={currentUserInfo}/> : null}
         </header>
     );
 }
