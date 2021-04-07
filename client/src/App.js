@@ -20,7 +20,6 @@ const App = () => {
     //quan sát state của redux store
     const storeState = useSelector ((state) => state.user_reducer);
     const loginInfo = useSelector((state) => state.user_reducer.login);
-    const currentBalance = useSelector((state) => state.user_reducer.credit);
     console.log(storeState);
 
 
@@ -40,8 +39,7 @@ const App = () => {
         return (<AdminPage userName ={loginInfo.userName}/>);
     } else if (loginInfo!= null && loginInfo.isAdmin === false){
         return (
-            <UserPage user={loginInfo}
-            balance={ currentBalance || loginInfo.balance }/>
+            <UserPage user={loginInfo}/>
         );
     } else if (loginInfo === undefined || loginInfo === null){
         return(

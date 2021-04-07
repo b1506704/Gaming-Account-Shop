@@ -166,6 +166,7 @@ const Card = ({account, category, card, type, mode}) => {
               </div>
               <div style={{color: "black"}}>Tình trạng: &nbsp;{account.isBought ? "Đã bán" : "Chưa bán"}</div>
               <div style={{color: "black"}}>Người mua:&nbsp; {account.accOwner}</div>
+              <div style={{color: "black"}}>Người bán:&nbsp; {account.accSeller}</div>
               <div> Tên trong game:&nbsp;
               { isEdit === false ? account.attr1
                 : (<input ref={accountInputRef.attr1Ref} type="text" placeholder={account.attr1}></input>)

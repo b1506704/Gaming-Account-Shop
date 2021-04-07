@@ -25,16 +25,17 @@ export const deleteAccount = async (req, res) => {
 }
 
 export const createAccount = async (req, res) => {
-    const { id, price, category, imgUrl, isBought, accOwner, attr1, attr2, attr3, attr4 } = req.body;
+    const { id, price, category, imgUrl, isBought, accOwner, accSeller, attr1, attr2, attr3, attr4 } = req.body;
 
     const newAccount = new Account(
         { 
             id: id, 
-            price:price,
+            price: price,
             category: category,
             imgUrl: imgUrl, 
-            isBought:isBought,
-            accOwner:accOwner, 
+            isBought: isBought,
+            accOwner: accOwner,
+            accSeller: accSeller, 
             attr1: attr1, 
             attr2: attr2, 
             attr3: attr3, 

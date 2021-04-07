@@ -25,7 +25,7 @@ const CardPage = ({context}) => {
                     category: categoryList !=null && categoryList.length!= 0 ? categoryList[getRndInteger(0,  categoryList.length - 1)].name : null,
                     imgUrl: null,
                     isBought: false, 
-                    accOwner: '',
+                    accSeller: 'admin',
                     attr1: 'Rỗng',
                     attr2: getRndInteger(1,7),
                     attr3: 'Rỗng',

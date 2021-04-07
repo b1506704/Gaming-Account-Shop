@@ -10,9 +10,8 @@ import GoogleMap from './GoogleMap/GoogleMap';
 import UserInfo from '../UserPage/UserInfo/UserInfo';
 import {logout, setNotification} from '../../actions/user_actions';
 import './NavBar.css';
-import LoadingContainer from '../../utils/LoadingContainer/LoadingContainer';
 
-const NavBar = ({userMode, userName, balance}) => {
+const NavBar = ({userMode, userName}) => {
     const dispatch = useDispatch();
     const modal = useRef(null);
     const [isLoginPageOpen, setIsLoginPageOpen] = useState(false);
@@ -46,7 +45,7 @@ const NavBar = ({userMode, userName, balance}) => {
                     }
                     {
                         userMode === "user" 
-                        ? <a style={{color: "yellow"}}> | {userName} | Số Dư: {balance} VND|</a>
+                        ? <a style={{color: "yellow"}}> | {userName} |</a>
                         : null
                     }
                     {
@@ -91,7 +90,7 @@ const NavBar = ({userMode, userName, balance}) => {
             </Modal>
             {currentNotif ? <Notification message={currentNotif}/> : null}
             { userMode === "admin" ? null :<GoogleMap/>}
-            { userMode === "user" ? <UserInfo user={currentUserInfo}/> : null}
+            { userMode ? <UserInfo user={currentUserInfo}/> : null}
         </header>
     );
 }

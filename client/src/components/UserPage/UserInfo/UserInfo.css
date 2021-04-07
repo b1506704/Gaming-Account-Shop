@@ -54,11 +54,18 @@
     margin-top: 2vh;
     display: flex;
     padding-right: 10px;
+    letter-spacing: 2px;
     justify-content: space-between;
     align-items: center;
     word-wrap: break-word;
     width: 100%;
     font-size: 20px;
+}
+.user_info_container div .image {
+   height: 100%;
+   border-radius: 5px;
+   
+   width: 100%;
 }
 .user_info_container div button {
     width: 100%;

@@ -7,10 +7,10 @@ import AccountList from '../AccountList/AccountList';
 import Footer from '../Footer/Footer';
 import './UserPage.css';
 
-const UserPage = ({user, balance}) => {
+const UserPage = ({user}) => {
     return(
         <div>
-            <NavBar userName={user.userName} userMode="user" balance= {balance}/>
+            <NavBar userName={user.userName} userMode="user"/>
             <HeadingTitle title={`Chào mừng ${user.userName} đến với Gaming Account Shop`} subtitle={''}/>
             <AccountCategory/>
             <AccountList/>
