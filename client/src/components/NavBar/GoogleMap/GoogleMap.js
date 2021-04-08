@@ -4,9 +4,9 @@ import './GoogleMap.css';
 
 const GoogleMap = () => {
     const [location, setLocation] = useState({
-        address: 'Bà Triệu, Ninh Kiều District, Can Tho City, Vietnam',
-        lat: 10.036521238174993,
-        lng: 105.78938745372986,
+        address: 'Trường Đại Học Thủ Dầu Một, 6 Đường Trần Văn Ơn, P. Phú Hòa, Tp. Thủ Dầu Một, Tỉnh Bình Dương, Vietnam',
+        lat: 10.980327606201172,
+        lng: 106.67426300048828,
     });
     const [zoomLevel, setZoomLevel] = useState(15);
 
