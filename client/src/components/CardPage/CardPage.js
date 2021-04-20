@@ -10,7 +10,7 @@ import './CardPage.css';
 const CardPage = ({context}) => {
     const dispatch = useDispatch();
     const accList = useSelector((state) => state.user_reducer.accountList);
-    const cardList = useSelector((state) => state.user_reducer.cardList);
+    // const cardList = useSelector((state) => state.user_reducer.cardList);
     const categoryList = useSelector((state) => state.user_reducer.categoryList);
     const carrier = ['Viettel', 'Mobifone', 'Vinaphone'];   
     const cardValue = [20000, 50000, 100000, 200000, 500000, 1000000];   
@@ -21,15 +21,15 @@ const CardPage = ({context}) => {
             createAccount(
                 {
                     id: getRndInteger(1,2000),  
-                    price: getRndInteger(50000,2500000),
+                    price: 0,
                     category: categoryList !=null && categoryList.length!= 0 ? categoryList[getRndInteger(0,  categoryList.length - 1)].name : null,
                     imgUrl: null,
                     isBought: false, 
                     accSeller: 'admin',
-                    attr1: 'Rỗng',
-                    attr2: getRndInteger(1,7),
-                    attr3: 'Rỗng',
-                    attr4: 'Rỗng'
+                    attr1: '',
+                    attr2: '',
+                    attr3: '',
+                    attr4: ''
                 }
             )
         );
@@ -46,7 +46,7 @@ const CardPage = ({context}) => {
     const addCategory = () => {
         dispatch(createCategory(
             {
-                name: getRndInteger(1,2000),
+                name: '',
                 imgUrl: null,
                 accNum: 0,
                 sellNum: 0
@@ -72,7 +72,7 @@ const CardPage = ({context}) => {
         e.preventDefault();
         const rank = searchInput.current.value;
         if (rank.trim() === '') {
-            dispatch(setNotification(`Vui lòng nhập Rank`));
+            dispatch(setNotification(`Vui lòng nhập Rank/Level`));
         } else {
             dispatch(filterAccountByRank(rank));
         }
@@ -82,17 +82,18 @@ const CardPage = ({context}) => {
         case "list":
             return(
                 <div className="card_page">
-                    <div className="card_header"> <b>Tài khoản game ({accList ? accList.length : 0})</b> 
+                    <div className="card_header"> <b>Tài khoản game ({accList ? accList.filter((acc) => acc.isBought === false).length : 0})</b> 
                         <button type="button" className="card_menu_button refresh_button_user drop_shadow" onClick={loadAccount}> Tải Mới  </button>
                         <form onSubmit={(e) => searchByRank(e)}>
-                            <input type="text" ref={searchInput} className="drop_shadow" placeholder="Tìm theo Rank"></input>
+                            <input type="text" ref={searchInput} className="drop_shadow" placeholder="Tìm theo Rank/Level"></input>
                             <input type="submit" className="drop_shadow"></input>
                         </form>
                     </div>
                     <div className="card_container">
                         {
-                            accList != null && accList.length != 0? 
-                            accList.map ((item,key) => 
+                            accList != null && accList.length != 0 ? 
+                            accList.filter((acc) => acc.isBought != true )
+                            .map ((item,key) => 
                             (<Card key={key} account={item} type={"acc"} mode={"view"}/>))
                             : (<LoadingContainer style={'dot'}/>)
                         }
@@ -150,23 +151,6 @@ const CardPage = ({context}) => {
                     </div>
                 </div>
             );
-        case "edit_card":
-            return(
-                <div className="card_page">
-                    <div className="card_header"> <b>Quản lý thẻ nạp ({cardList ? cardList.length : 0})</b> 
-                        <button type="button" className="card_menu_button drop_shadow" onClick={addCard}> Thêm </button>
-                        <button type="button" className="card_menu_button refresh_button drop_shadow" onClick={loadCard}> Tải Mới  </button>
-                    </div>
-                    <div className="card_container">
-                        {
-                            cardList != null && cardList.length != 0 ?
-                            cardList.map ((item,key) => 
-                            (<Card key={key} card={item} type={"card"} mode={"edit"}/>))
-                            : <LoadingContainer style={'bar'}/>
-                        }
-                    </div>
-                </div>
-            );                
         default:
             return (<LoadingContainer style={'spinner'}/>);
     }

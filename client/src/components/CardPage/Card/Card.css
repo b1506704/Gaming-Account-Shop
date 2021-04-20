@@ -6,8 +6,7 @@
   border: transparent;
   background: #00010271;
   user-select: none;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   min-height: 400px;
   width: 310px;
   border-radius: 10px;
@@ -29,7 +28,7 @@
   user-select: none;
   overflow: hidden;
   height: 40px; 
-  color: rgb(237, 243, 248);
+  color: rgb(255, 253, 253);
   font-size: 25px;
   width: 100%;
   z-index: 2;
@@ -127,6 +126,4 @@
   user-select: none;
   -webkit-user-drag: none;
 }  
-::-webkit-scrollbar {
-	width: 0px;
-}
+

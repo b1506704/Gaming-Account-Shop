@@ -15,9 +15,6 @@ import {
   getUser
 } from '../../../actions/user_actions';
 import './Card.css';
-import viettel from '../../../assets/imgs/viettel.png'; 
-import mobifone from '../../../assets/imgs/mobi.png'
-import vinaphone from '../../../assets/imgs/vina.png'
 import dota2  from '../../../assets/imgs/dota2.jpg';
 import lmht from '../../../assets/imgs/lmht.jpg'
 import lienquan from '../../../assets/imgs/lienquan.jpg';
@@ -30,11 +27,15 @@ import freefire from '../../../assets/imgs/freefire.jpg';
 //isBought: tình trạng đã bán hay chưa của tài khoản
 //accNum: số tài khoản game hiện có
 //sellNum: số tài khoản game đã bán
-const Card = ({account, category, card, type, mode}) => {
+const Card = ({account, category, card, type, mode, isInventory}) => {
     const accountInputRef = 
       {
         ctgRef: useRef(null),
         priceRef: useRef(null),
+        name: useRef(null),
+        passWord: useRef(null),
+        email: useRef(null),
+        phoneNumber: useRef(null),
         attr1Ref: useRef(null),
         attr2Ref: useRef(null),
         attr3Ref: useRef(null),
@@ -56,19 +57,17 @@ const Card = ({account, category, card, type, mode}) => {
     const currentLoginUser = useSelector((state) => state.user_reducer.login);
     const currentCategory = useSelector((state) => state.user_reducer.categoryList);
     const currentAccount = useSelector((state) => state.user_reducer.accountList);
-    const carrierList = ['Viettel', 'Mobifone', 'Vinaphone'];   
-    const cardValueList = [20000, 50000, 100000, 200000, 500000, 1000000];   
     
     const countCtgByName = (name) => {
+      let count = 0;
       if (currentAccount) {
-        let count = 0;
         for (let i = 0; i < currentAccount.length; i++) {
           if (currentAccount[i].category === name) {
             count++;
           }
         }
-        return count;
       }
+      return count;
     }
 
     const countCtgBySell = (name) => {
@@ -79,8 +78,8 @@ const Card = ({account, category, card, type, mode}) => {
             count++;
           }
         }
-        return count;
       }
+      return count;
     }
 
     const onCardSelect = () => {
@@ -104,6 +103,10 @@ const Card = ({account, category, card, type, mode}) => {
         const toUpdateAcc = {
           price: accountInputRef.priceRef.current.value || account.price,
           category: accountInputRef.ctgRef.current.value || account.category,
+          name: accountInputRef.name.current.value || account.name,
+          passWord: accountInputRef.passWord.current.value || account.passWord,
+          email: accountInputRef.email.current.value || account.email,
+          phoneNumber: accountInputRef.phoneNumber.current.value || account.phoneNumber,
           imgUrl:  currentBase64 ? currentBase64 : account.imgUrl,
           attr1: accountInputRef.attr1Ref.current.value || account.attr1,
           attr2: accountInputRef.attr2Ref.current.value || account.attr2,
@@ -143,8 +146,10 @@ const Card = ({account, category, card, type, mode}) => {
     
     return (
       <div className="card_detail drop_shadow">
-        <div className="title_bar drop_shadow">
-          { type === "acc" ? '#' + account.id : type === "category" ? '#' + category.name : type ==="card" ? '#' + card.id : null }            
+        <div className="title_bar drop_shadow neon_effect">
+        
+        {account.price} &nbsp; VND
+          {/* { type === "acc" ? '#' + account.id : type === "category" ? '#' + category.name : type ==="card" ? '#' + card.id : null }             */}
         </div>
         { 
           type === "acc" 
@@ -159,14 +164,46 @@ const Card = ({account, category, card, type, mode}) => {
                     </select>)
                 }
               </div>
-              <div> Giá: &nbsp;
+              { mode === "edit" ? 
+                <div> Giá: &nbsp;
                 { isEdit === false ? account.price + " VND"
                   : (<input ref={accountInputRef.priceRef} type="text" placeholder={account.price}></input>)
                 }
-              </div>
-              <div style={{color: "black"}}>Tình trạng: &nbsp;{account.isBought ? "Đã bán" : "Chưa bán"}</div>
-              <div style={{color: "black"}}>Người mua:&nbsp; {account.accOwner}</div>
+                </div>
+                : null
+              }
+              { !isInventory ? <>
+                <div style={{color: "black"}}>Tình trạng: &nbsp;{account.isBought ? "Đã bán" : "Chưa bán"}</div>
+                <div style={{color: "black"}}>Người mua:&nbsp; {account.accOwner}</div>
+              </>
+              : null
+            }
               <div style={{color: "black"}}>Người bán:&nbsp; {account.accSeller}</div>
+              { mode === "edit" || isInventory ?
+                <>
+                <div> Tên tài khoản:&nbsp;
+                { isEdit === false ? account.name
+                  : (<input ref={accountInputRef.name} type="text" required placeholder={account.name}></input>)
+                }
+                </div>
+                <div> Mật khẩu:&nbsp;
+                { isEdit === false ? account.passWord
+                  : (<input ref={accountInputRef.passWord} type="text" placeholder={account.passWord}></input>)
+                }
+                </div>
+                <div> Email:&nbsp;
+                { isEdit === false ? account.email
+                  : (<input ref={accountInputRef.email} type="email" placeholder={account.email}></input>)
+                }
+                </div>
+                <div> Số điện thoại:&nbsp;
+                { isEdit === false ? account.phoneNumber
+                  : (<input ref={accountInputRef.phoneNumber} type="text" placeholder={account.phoneNumber}></input>)
+                }
+                </div>
+                </>
+                : null
+              }
               <div> Tên trong game:&nbsp;
               { isEdit === false ? account.attr1
                 : (<input ref={accountInputRef.attr1Ref} type="text" placeholder={account.attr1}></input>)
@@ -189,48 +226,25 @@ const Card = ({account, category, card, type, mode}) => {
               </div>
               
             </div>
-          : type === "category" 
-            ? <div className="acc_info">
-                <div> Tên game:
-                  { isEdit === false ? category.name
-                  : (<input ref={categoryInputRef.nameRef} type="text" placeholder={category.name}></input>)
-                  }
-                </div>
-                <div style={{color: "black"}}> Số tài khoản hiện có:&nbsp; {countCtgByName(category.name) || null}</div>
-                <div style={{color: "black"}}> Đã bán:&nbsp; {countCtgBySell(category.name) || null}</div>
-              </div>
-              : type === "card"
-                ? <div className="acc_info">
-                    <div> Nhà mạng:&nbsp;
-                        { isEdit === false ? card.carrier
-                          : (<select ref={cardInputRef.carrierRef}>
-                              { carrierList != null 
-                                ? carrierList.map((ele, key) => (<option value={ele} key={key}>{ele}</option>))
-                                : null
-                              }
-                            </select>)
-                        }
-                    </div>
-                    <div> Giá trị: &nbsp;
-                        { isEdit === false ? card.value
-                          : (<select ref={cardInputRef.valueRef}>
-                              { cardValueList != null 
-                                ? cardValueList.map((ele, key) => (<option value={ele} key={key}>{ele}</option>))
-                                : null
-                              }
-                            </select>)
-                        }
-                    </div>
-                    <div style={{color: "black"}}> Tình trạng:&nbsp;  {card.isBought ? "Đã bán" : "Chưa bán" }</div>
-                  </div>
-                  : null   
+          // : type === "category" 
+          //   ? <div className="acc_info">
+          //       <div> Tên game:
+          //         { isEdit === false ? category.name
+          //         : (<input ref={categoryInputRef.nameRef} type="text" placeholder={category.name}></input>)
+          //         }
+          //       </div>
+          //       <div style={{color: "black"}}> Số tài khoản hiện có:&nbsp; {countCtgByName(category.name) || null}</div>
+          //       <div style={{color: "black"}}> Đã bán:&nbsp; {countCtgBySell(category.name) || null}</div>
+          //     </div>
+          : null   
         }
         {
-          mode === "view"
+          mode === "view" && !isInventory
           ?  <button type="button" className="card_button drop_shadow" onClick={onCardSelect}>
                {type === "acc" ? "Mua" : "Duyệt"}
             </button>
-          : <>
+          : mode === "edit" && !isInventory
+          ? <>
               { isEdit === false 
                 ? (<button type="button" className="card_button edit_button drop_shadow" onClick={onCardEdit}>
                     Sửa
@@ -252,6 +266,7 @@ const Card = ({account, category, card, type, mode}) => {
                   (X)         
               </button>
             </>
+            : null
         }
         <div className="image_container">
           { type === "acc" && (account.imgUrl || currentBase64) ? 
@@ -270,18 +285,6 @@ const Card = ({account, category, card, type, mode}) => {
               ? freefire
               : currentBase64 || category.imgUrl
             }/>)   
-          : type === "card" ?
-            (<img className="image" 
-              alt="Loading..." 
-              src={
-                card.carrier === "Viettel" 
-              ? viettel
-              : card.carrier === "Mobifone"
-              ? mobifone
-              : card.carrier === "Vinaphone"
-              ? vinaphone
-              : null
-            }/>)  
           : (<LoadingContainer style="spinner"/>)
           }
         </div>

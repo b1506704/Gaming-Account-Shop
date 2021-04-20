@@ -1,0 +1,63 @@
+.inventory_container {
+    /* height: 430px; */
+    width: 1000px;
+    background-color: rgb(173, 173, 155);
+    border-radius: 15px;
+ }
+ .inventory_container h1 {
+     text-align: center;
+     width: 100%;
+     margin-bottom: 25px;
+     margin-top: 25px;
+ }
+ /* .inventory_container div {
+     padding-left: 100px;
+     padding-right: 100px;
+     width: 100%;
+     margin-bottom: 25px;
+ }
+ .inventory_container div label {
+     font-size: 30px;
+ } */
+ 
+ .inventory_container input[type=submit], 
+ .inventory_container input[type=button]  {
+     height: 80px;
+     width: 80px;
+     font-size: 15px;
+     border-radius: 100%;
+     color: rgb(0, 0, 0);
+     border-style: none;
+     background-color: rgb(255, 255, 255);
+     transition: all 0.35s ease-in-out;
+     margin: 0;
+ }
+ .inventory_container .button_container {
+     /* position: absolute; */
+     /* bottom: 15vh; */
+     /* right: 35vh; */
+     display: flex;
+     justify-content: space-evenly;
+     align-items: center;
+     margin: 15px;
+ }
+ .inventory_container input[type=submit]:hover, .inventory_container input[type=button]:hover {
+     transform: translateY(2.5px);
+     color: rgb(207, 195, 195);
+ }
+ .inventory_container .scroll_position_holder {
+     position: relative;
+     top: -25vh;
+ }
+ .inventory_container .item {
+    display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+	flex-wrap: wrap;
+	height: 500px;
+	width: 100%;
+	overflow-y: auto;
+	background-color: rgba(255, 255, 255, 0.534);
+	border-bottom: 5px double rgba(59, 30, 30, 0.486);
+}

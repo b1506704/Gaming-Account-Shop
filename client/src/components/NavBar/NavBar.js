@@ -5,6 +5,7 @@ import Modal from '../Modal/Modal';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import CreditPage from '../CreditPage/CreditPage';
+import InventoryPage from '../InventoryPage/InventoryPage';
 import Notification from './Notification/Notification';
 import GoogleMap from './GoogleMap/GoogleMap';
 import UserInfo from '../UserPage/UserInfo/UserInfo';
@@ -15,6 +16,7 @@ const NavBar = ({userMode, userName}) => {
     const dispatch = useDispatch();
     const modal = useRef(null);
     const [isLoginPageOpen, setIsLoginPageOpen] = useState(false);
+    const [isInventoryPageOpen, setIsInventoryPageOpen] = useState(false);
     const [isCreditPageOpen, setIsCreditPageOpen] = useState(false);
     const [isRegisterPageOpen, setIsRegisterPageOpen] = useState(false);
     const currentUserInfo = useSelector ((state) => state.user_reducer.login);
@@ -35,13 +37,24 @@ const NavBar = ({userMode, userName}) => {
                     {
                         userMode != "user" 
                         ? null 
-                        : <a onClick={() => {
-                            setIsCreditPageOpen(true);
-                            setIsRegisterPageOpen(false);
-                            setIsLoginPageOpen(false);
-                            modal.current.open();
-                        }}>
-                            Nạp Thẻ</a>
+                        : <>
+                            <a onClick={() => {
+                                    setIsInventoryPageOpen(true);
+                                    setIsCreditPageOpen(false);
+                                    setIsRegisterPageOpen(false);
+                                    setIsLoginPageOpen(false);
+                                    modal.current.open();
+                                }}>
+                               Tài khoản</a>
+                            <a onClick={() => {
+                                setIsCreditPageOpen(true);
+                                setIsRegisterPageOpen(false);
+                                setIsLoginPageOpen(false);
+                                setIsInventoryPageOpen(false);
+                                modal.current.open();
+                            }}>
+                                Nạp Thẻ</a>
+                        </>
                     }
                     {
                         userMode === "user" 
@@ -59,6 +72,7 @@ const NavBar = ({userMode, userName}) => {
                             setIsRegisterPageOpen(true);
                             setIsCreditPageOpen(false);
                             setIsLoginPageOpen(false);
+                            setIsInventoryPageOpen(false);
                             modal.current.open();
                         }}>
                             Đăng Ký</a>
@@ -77,6 +91,7 @@ const NavBar = ({userMode, userName}) => {
                             setIsLoginPageOpen(true);
                             setIsCreditPageOpen(false);
                             setIsRegisterPageOpen(false);
+                            setIsInventoryPageOpen(false);
                             modal.current.open();
                         }}>
                             Đăng Nhập</a> 
@@ -87,6 +102,7 @@ const NavBar = ({userMode, userName}) => {
                 { isLoginPageOpen ? (<LoginPage close={() => modal.current.close()}/>) : null}
                 { isCreditPageOpen ? (<CreditPage close={() => modal.current.close()}/>) : null}
                 { isRegisterPageOpen ? (<RegisterPage close={() => modal.current.close()}/>) : null}
+                { isInventoryPageOpen ? (<InventoryPage close={() => modal.current.close()}/>) : null}
             </Modal>
             {currentNotif ? <Notification message={currentNotif}/> : null}
             { userMode === "admin" ? null :<GoogleMap/>}

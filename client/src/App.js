@@ -10,7 +10,7 @@ import HeadingTitle from './components/HeadingTitle/HeadingTitle';
 import AdminPage from './components/AdminPage/AdminPage';
 import UserPage from './components/UserPage/UserPage';
 import LoadingContainer from './utils/LoadingContainer/LoadingContainer';
-import {fetchAccount, fetchCard, fetchCategory, setNotification} from './actions/user_actions';
+import {fetchAccount, fetchCard, fetchCategory} from './actions/user_actions';
 import './App.css';
 
 const App = () => {
@@ -46,7 +46,6 @@ const App = () => {
             <div>
                 <NavBar/> 
                 <HeadingTitle title={title} subtitle={subTitle} />
-                <AccountCategory/>
                 <AccountList/>
                 <Footer/>
             </div>

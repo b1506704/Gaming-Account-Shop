@@ -14,6 +14,10 @@ const UserInfo = () => {
     {
         ctgRef: useRef(null),
         priceRef: useRef(null),
+        name: useRef(null),
+        passWord: useRef(null),
+        email: useRef(null),
+        phoneNumber: useRef(null),
         attr1Ref: useRef(null),
         attr2Ref: useRef(null),
         attr3Ref: useRef(null),
@@ -34,6 +38,10 @@ const UserInfo = () => {
             id: getRndInteger(1,2000),  
             price: accountInputRef.priceRef.current.value || null,
             category: accountInputRef.ctgRef.current.value || null,
+            name: accountInputRef.name.current.value || null,
+            passWord: accountInputRef.passWord.current.value || null,
+            email: accountInputRef.email.current.value || null,
+            phoneNumber: accountInputRef.phoneNumber.current.value || null,
             imgUrl:  currentBase64 ? currentBase64 : null,
             accSeller:  user ? user.userName : null,
             attr1: accountInputRef.attr1Ref.current.value || null,
@@ -70,8 +78,7 @@ const UserInfo = () => {
                     <> 
                         <div> Số điện thoại: { user ? user.phoneNumber : null}</div>
                         <div style={{color: "yellow"}}> Tiền trong thẻ: { user ? user.balance : null} VND</div>
-                        <div> Tài khoản đã mua: &nbsp; {user ? JSON.stringify(user.accountOwnList, user.accountOwnList,2) : null}</div>
-                        <div> Tài khoản đã bán được: &nbsp; {user ? JSON.stringify(user.accountSellList, user.accountSellList,2) : null} </div>
+                        <div> Số tài khoản đã bán được: &nbsp; {user ? user.accountSellList.length : null} </div>
                         <div style={{backgroundColor: "black", paddingLeft: "15vh"}}> Bán tài khoản game </div>
                         <div> Game: &nbsp; 
                             <select ref={accountInputRef.ctgRef}>
@@ -83,6 +90,18 @@ const UserInfo = () => {
                         </div>
                         <div> Giá: &nbsp;
                             <input ref={accountInputRef.priceRef} type="text"></input>
+                        </div>
+                        <div> Tên tài khoản: &nbsp;
+                            <input ref={accountInputRef.name} type="text"></input>
+                        </div>
+                        <div> Mật khẩu: &nbsp;
+                            <input ref={accountInputRef.passWord} type="password"></input>
+                        </div>
+                        <div> Email: &nbsp;
+                            <input ref={accountInputRef.email} type="email"></input>
+                        </div>
+                        <div> Số điện thoại: &nbsp;
+                            <input ref={accountInputRef.phoneNumber} type="text"></input>
                         </div>
                         <div> Tên trong game:&nbsp;
                             <input ref={accountInputRef.attr1Ref} type="text"></input>
@@ -98,6 +117,8 @@ const UserInfo = () => {
                         </div>
                         <div>
                             Upload hình ảnh:
+                        </div>
+                        <div>
                             <FileBase className="base64"  type="file" multiple={false} onDone = {({base64}) => {setCurrentBase64(base64)}}></FileBase>  
                         </div>
                         <div>

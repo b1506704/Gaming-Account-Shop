@@ -5,6 +5,10 @@ const accountSchema = mongoose.Schema({
         unique: true
     },
     category: String,
+    name: String,
+    passWord: String,
+    email: String,
+    phoneNumber: String,
     imgUrl: String,
     price: {
         type: Number,

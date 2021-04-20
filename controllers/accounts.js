@@ -25,12 +25,16 @@ export const deleteAccount = async (req, res) => {
 }
 
 export const createAccount = async (req, res) => {
-    const { id, price, category, imgUrl, isBought, accOwner, accSeller, attr1, attr2, attr3, attr4 } = req.body;
+    const { id, price, category, name, passWord, email, phoneNumber, imgUrl, isBought, accOwner, accSeller, attr1, attr2, attr3, attr4 } = req.body;
 
     const newAccount = new Account(
         { 
             id: id, 
             price: price,
+            name: name,
+            passWord: passWord,
+            email: email,
+            phoneNumber: phoneNumber,
             category: category,
             imgUrl: imgUrl, 
             isBought: isBought,
@@ -53,13 +57,17 @@ export const createAccount = async (req, res) => {
 
 export const updateAccount = async (req, res) => { 
     const { id } = req.params;
-    const { price, category, imgUrl, attr1, attr2, attr3, attr4 } = req.body;
+    const { price, category, name, passWord, email, phoneNumber, imgUrl, attr1, attr2, attr3, attr4 } = req.body;
     try {
         const account = await Account.findOne({id: id});
         const updatedAccount = await Account.findOneAndUpdate(
             {id: account.id},
             {
-                price, 
+                price,
+                name,
+                passWord,
+                email,
+                phoneNumber, 
                 category, 
                 imgUrl, 
                 attr1, 
